@@ -1,0 +1,28 @@
+how to update telepresenca on server 10.16.0.28:
+
+config:
+cd ~/Dropbox/Projects/Laravel/teleprenca
+git config --global user.email "lucas.maia@huufma.br"
+git config --global user.name "Lucas Bezerra Maia"
+git remote add origin http://desenvolvimento.huufma.br:8888/lucasmaia/telepresenca.git
+git remote set-url origin http://desenvolvimento.huufma.br:8888/lucasmaia/telepresenca.git
+
+on local pc:
+cd ~/Dropbox/Projects/Laravel/teleprenca
+git init
+git add .
+git commit -m "-  -"
+git push -u origin master
+
+on server side:
+ssh lucas@10.16.0.28
+su Nut1s2012
+cd /var/www/html
+mv telepresenca bkp/telepresenca_bkp {adcione o num do bkp. Curr: 9}
+git clone http://desenvolvimento.huufma.br:8888/lucasmaia/telepresenca.git
+cp bkp/telepresenca_bkp/.env telepresenca/.env
+chgrp -R www-data /var/www/html/telepresenca
+chmod -R 775 /var/www/html/telepresenca/storage/
+cd telepresenca
+composer require jailtonsc/validador-cpf-laravel
+php artisan vendor:publish
