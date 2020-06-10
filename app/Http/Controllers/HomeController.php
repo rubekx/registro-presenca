@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Session::has('atividade')){
+        if (Session::has('atividade')) {
             $atividade = Session::get('atividade');
             $modalidade = Session::get('modalidade');
             $tipo = Session::get('tipo');
@@ -46,20 +46,21 @@ class HomeController extends Controller
         return redirect('login');
     }
 
-    public function getLoginPage(){
+    public function getLoginPage()
+    {
         date_default_timezone_set('America/Fortaleza');
         $today = date("Y-m-d");
         $hora  = date("H:i");
-        $inicio_min = date("H:i", strtotime($hora) + 60*30);
-        $termino_max = date("H:i", strtotime($hora) - 60*60*2);
+        $inicio_min = date("H:i", strtotime($hora) + 60 * 30);
+        $termino_max = date("H:i", strtotime($hora) - 60 * 60 * 2);
         $atvs = Atividade::where([
-           ['dt', '=', $today],
-           ['status', '=', 2],
-           ['hr_inicio', '<=', $inicio_min],
-           ['hr_termino', '>=', $termino_max],
+            ['dt', '=', $today],
+            ['status', '=', 2],
+            ['hr_inicio', '<=', $inicio_min],
+            ['hr_termino', '>=', $termino_max],
         ])->get();
-        $atividades = Array();
-        foreach($atvs as $a){
+        $atividades = array();
+        foreach ($atvs as $a) {
             $modalidade = Modalidade::find($a->modalidade);
             $tipo = Tipo::find($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
@@ -71,20 +72,21 @@ class HomeController extends Controller
         ]);
     }
 
-    public function getRestrictLoginPage(){
+    public function getRestrictLoginPage()
+    {
         date_default_timezone_set('America/Fortaleza');
         $today = date("Y-m-d");
         $hora  = date("H:i");
-        $inicio_min = date("H:i", strtotime($hora) + 60*30);
-        $termino_max = date("H:i", strtotime($hora) - 60*60*2);
+        $inicio_min = date("H:i", strtotime($hora) + 60 * 30);
+        $termino_max = date("H:i", strtotime($hora) - 60 * 60 * 2);
         $atvs = Atividade::where([
             ['dt', '=', $today],
             ['status', '=', 2],
             ['hr_inicio', '<=', $inicio_min],
             ['hr_termino', '>=', $termino_max],
         ])->get();
-        $atividades = Array();
-        foreach($atvs as $a){
+        $atividades = array();
+        foreach ($atvs as $a) {
             $modalidade = Modalidade::find($a->modalidade);
             $tipo = Tipo::find($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
@@ -94,30 +96,30 @@ class HomeController extends Controller
         return view('restrict_login');
     }
 
-    public function login(Request $request){
-         $this->validate($request, [
+    public function login(Request $request)
+    {
+        $this->validate($request, [
             'idAtividade'  => 'required|min:1'
         ]);
 
-	info($request);
+        info($request);
 
         $id = $request->idAtividade;
 
         $atividade = Atividade::find($id);
-        if($atividade==null){
-           // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
+        if ($atividade == null) {
+            // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
             return  view('auth.login')->with(['msg' => 'Atividade não encontrada...']);
-        }
-        else {
+        } else {
             $today = date("Y-m-d");
             $dataAtividade = $atividade->dt;
 
-	    // if(1){
-            if(strtotime($dataAtividade)==strtotime($today)){
+            // if(1){
+            if (strtotime($dataAtividade) == strtotime($today)) {
                 $modalidade = Modalidade::find($atividade->modalidade);
                 $tipo = Tipo::find($atividade->tipo);
 
-                if(!($atividade->modalidade==2&&$atividade->tipo==22))
+                if (!($atividade->modalidade == 2 && $atividade->tipo == 22))
                     return  view('restrict_login');
 
                 $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
@@ -138,29 +140,28 @@ class HomeController extends Controller
 
             return  view('auth.login')->with(['msg' => 'Atividade fora de prazo. O registro de presença deve ser feito no mesmo dia que a atividade ocorre.']);
         }
-
     }
 
-    public function restrictLogin(Request $request){
-         $this->validate($request, [
+    public function restrictLogin(Request $request)
+    {
+        $this->validate($request, [
             'idAtividade'  => 'required|min:1'
         ]);
 
-	info($request);
+        info($request);
 
 
         $id = $request->idAtividade;
 
         $atividade = Atividade::find($id);
-        if($atividade==null){
-           // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
+        if ($atividade == null) {
+            // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
             return  view('restrict_login')->with(['msg' => 'Identificador fornecido não se refere a nenhuma atividade.']);
-        }
-        else {
+        } else {
             $today = date("Y-m-d");
             $dataAtividade = $atividade->dt;
 
-            if(strtotime($dataAtividade)==strtotime($today)){
+            if (strtotime($dataAtividade) == strtotime($today)) {
                 $modalidade = Modalidade::find($atividade->modalidade);
                 $tipo = Tipo::find($atividade->tipo);
 
@@ -182,33 +183,33 @@ class HomeController extends Controller
 
             return  view('restrict_login')->with(['msg' => 'Identificador fornecido não se refere a nenhuma atividade.']);
         }
-
     }
 
-    public function getPessoa(Request $request){
+    public function getPessoa(Request $request)
+    {
 
-	info($request);
+        info($request);
 
 
-        if(!Session::has('atividade'))
+        if (!Session::has('atividade'))
             return redirect("login");
 
         $search = $request->searchTag;
         $pessoa = null;
 
-        if($search!=""){
+        if ($search != "") {
             $found = false;
             $pessoa = Pessoa::where('email', $search)->first(); //Procurando por email
-            if($pessoa!=null)
+            if ($pessoa != null)
                 $found = true;
 
-            if(!$found){
+            if (!$found) {
                 $pessoa = Pessoa::where("cpf", $search)->first(); //Procurando por cpf
-                if($pessoa != null)
+                if ($pessoa != null)
                     $found = true;
             }
 
-            if($found){
+            if ($found) {
                 $profGeral = ProfGeral::where("pessoa", $pessoa->id)->first();
                 $profSaude = ProfSaude::where("pessoa", $pessoa->id)->first();
 
@@ -219,14 +220,14 @@ class HomeController extends Controller
                 $cbo  = null;
                 $resMun =  null;
                 $resEst = null;
-                if($profGeral!=null){
+                if ($profGeral != null) {
                     $cbo = Cbo::where("codigo", $profGeral->cbo)->first();
                     $resMun = Municipio::where("ibge", $profGeral->municipio)->first();
                     $resEst = Estado::where("id",  $resMun->uf)->first();
                 }
 
                 $ubs = null;
-                if($profSaude!=null){
+                if ($profSaude != null) {
                     $ubs = Ubs::where("cnes", $profSaude->ubs)->first();
                 }
 
@@ -240,8 +241,7 @@ class HomeController extends Controller
                     'resEst' => $resEst,
                     'ubs' => $ubs
                 ]);
-            }
-            else {
+            } else {
 
                 $atividade = Session::get('atividade');
                 $modalidade = Session::get('modalidade');
@@ -270,13 +270,15 @@ class HomeController extends Controller
         ]);
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Session::flush();
         return redirect('login');
     }
 
-    public function getRegistroPage(){
-         if(!Session::has('pessoa'))
+    public function getRegistroPage()
+    {
+        if (!Session::has('pessoa'))
             return redirect("home");
 
         // $ipAddress = $_SERVER['REMOTE_ADDR'];
@@ -292,14 +294,14 @@ class HomeController extends Controller
         $ipAddress = $request->getClientIp();
 
         $estados = Estado::all();
-        $arrayEstados = Array();
-        foreach($estados as $estado){
+        $arrayEstados = array();
+        foreach ($estados as $estado) {
             $arrayEstados[$estado->id] = $estado->descricao;
         }
 
         $municipios = Municipio::all();
-        $arrayMun = Array();
-        foreach($municipios as $mun){
+        $arrayMun = array();
+        foreach ($municipios as $mun) {
             $arrayMun[$mun->ibge] = $mun->nome;
         }
 
@@ -310,11 +312,12 @@ class HomeController extends Controller
         ]);
     }
 
-    public function persistPresenca(Request $request){
+    public function persistPresenca(Request $request)
+    {
 
-	info($request);
+        info($request);
 
-        if(!Session::has('pessoa'))
+        if (!Session::has('pessoa'))
             return redirect("home");
 
         $ip = $request->ip;
@@ -325,12 +328,12 @@ class HomeController extends Controller
         $profSaude = Session::get('profSaude');
         $ubs = null;
 
-        if($profSaude!=null)
+        if ($profSaude != null)
             $ubs = $profSaude->ubs;
 
         $aux = Presenca::where([['atividade', '=', $atividade->id], ['pessoa', '=', $pessoa->id]])->first();
 
-        if($aux!=null)
+        if ($aux != null)
             $presenca = $aux;
         else
             $presenca = new Presenca;
@@ -349,31 +352,42 @@ class HomeController extends Controller
         $local = Municipio::find($presenca->local);
         $estado = Estado::find($local->uf);
         $local = $local->nome . '/' . $estado->sigla;
-        if($ubs!=null)
+        if ($ubs != null)
             $ubs = Municipio::find($presenca->ubs);
 
-	$presencaKey = new PresencaKey;
-	$key = $presencaKey->where([
-		['presenca', '=', $presenca->id]
-	])->get()->first();
+        // $presencaKey = new PresencaKey;
+        // $key = $presencaKey->where([
+        // 	['presenca', '=', $presenca->id]
+        // ])->get()->first();
 
-	if(sizeof($key) == 0){
-		do {
-			$codigo = md5(uniqid(rand(), true));
-			$query = $presencaKey->where('key_auth', '=', $codigo)->get();
-		} while(sizeof($query) >= 1);
+        // if(sizeof($key) == 0){
+        // 	do {
+        // 		$codigo = md5(uniqid(rand(), true));
+        // 		$query = $presencaKey->where('key_auth', '=', $codigo)->get();
+        // 	} while(sizeof($query) >= 1);
 
-		$presencaKey->presenca = $presenca->id;
-		$presencaKey->key_auth = $codigo;
-		$presencaKey->used = false;
-		$presencaKey->save();
-	}
-	else {
-		$presencaKey = $key;
-		$codigo = $presencaKey->key_auth;
-	}
+        // 	$presencaKey->presenca = $presenca->id;
+        // 	$presencaKey->key_auth = $codigo;
+        // 	$presencaKey->used = false;
+        // 	$presencaKey->save();
+        // }
+        // else {
+        // 	$presencaKey = $key;
+        // 	$codigo = $presencaKey->key_auth;
+        // }
 
-       return view('comprovante')->with([
+        if(!PresencaKey::where('presenca',$presenca->id)->exists()){
+            $presencaKey = new PresencaKey;
+            $presencaKey->presenca = $presenca->id;
+            $presencaKey->key_auth = md5(uniqid(rand(), true));
+            $presencaKey->used = false;
+            $presencaKey->save();
+        }
+        else {
+            $presencaKey = PresencaKey::where('presenca',$presenca->id)->get()->first();         
+        }
+
+        return view('comprovante')->with([
             'atividade' => $atividade,
             'pessoa' => $pessoa,
             'local' => $local,
@@ -381,11 +395,11 @@ class HomeController extends Controller
             'ip' => $ip,
             'aux' => $aux,
             'key' => $presencaKey->key_auth
-       ]);
-
+        ]);
     }
 
-    public function getPessoaPage(){
+    public function getPessoaPage()
+    {
 
         $atividade = Session::get('atividade');
         $modalidade = Session::get('modalidade');
@@ -412,127 +426,127 @@ class HomeController extends Controller
 
 
 
-	public function getAvalPage(Request $request){
-		$key = $request->key;
-		$isValid = false;
-		$msg = "";
-		$perguntasGerais = array();
-		$perguntasAval = array();
-		$atv = null;
+    public function getAvalPage(Request $request)
+    {
+        $key = $request->key;
+        $isValid = false;
+        $msg = "";
+        $perguntasGerais = array();
+        $perguntasAval = array();
+        $atv = null;
 
-		$pk = new PresencaKey;
-		$presencaKey = $pk->where('key_auth', '=', $key)->get()->first();
-		if(sizeof($presencaKey) >= 1){
-			if(!$presencaKey->used){
-				$p = new Pergunta;
-				$perguntasGerais = $p->where('tipo_avaliacao', '=', 1)->get();
-				$perguntasAval = $p->where('tipo_avaliacao', '=', 2)->get();
-				$isValid = true;
+        $pk = new PresencaKey;
+        $presencaKey = $pk->where('key_auth', '=', $key)->get()->first();
+        if (sizeof($presencaKey) >= 1) {
+            if (!$presencaKey->used) {
+                $p = new Pergunta;
+                $perguntasGerais = $p->where('tipo_avaliacao', '=', 1)->get();
+                $perguntasAval = $p->where('tipo_avaliacao', '=', 2)->get();
+                $isValid = true;
 
-				$presen = Presenca::find($presencaKey->presenca);
-				if($presen!=null){
-					$atv = Atividade::find($presen->atividade);
-				}
-			}
-			else {
-				$msg = "A chave " .$key. " já foi utilizada.";
-			}
-		}
-		else {
-			$msg = "A chave " . $key . " é inválida.";
-		}
+                $presen = Presenca::find($presencaKey->presenca);
+                if ($presen != null) {
+                    $atv = Atividade::find($presen->atividade);
+                }
+            } else {
+                $msg = "A chave " . $key . " já foi utilizada.";
+            }
+        } else {
+            $msg = "A chave " . $key . " é inválida.";
+        }
 
-       	return view('avaliacao')->with([
-			'key' => $key,
-			'perguntasGerais' => $perguntasGerais,
-			'perguntasAval' => $perguntasAval,
-			'tipoAval' => 2,
-			'isValid' => $isValid,
-			'msg' => $msg,
-			'atv' => $atv
-        	]);
-    	}
+        return view('avaliacao')->with([
+            'key' => $key,
+            'perguntasGerais' => $perguntasGerais,
+            'perguntasAval' => $perguntasAval,
+            'tipoAval' => 2,
+            'isValid' => $isValid,
+            'msg' => $msg,
+            'atv' => $atv
+        ]);
+    }
 
-    	public function persistAvaliacao(Request $request){
+    public function persistAvaliacao(Request $request)
+    {
 
-    		$key = $request->key;
-               	$ip = $request->ip;
-               	$tipoAval = $request->tipoAval;
+        $key = $request->key;
+        $ip = $request->ip;
+        $tipoAval = $request->tipoAval;
 
-               	$p = new Pergunta;
-		$perguntasGerais = $p->where('tipo_avaliacao', '=', 1)->get();
-		$perguntasAval = $p->where('tipo_avaliacao', '=', 2)->get();
+        $p = new Pergunta;
+        $perguntasGerais = $p->where('tipo_avaliacao', '=', 1)->get();
+        $perguntasAval = $p->where('tipo_avaliacao', '=', 2)->get();
 
-		$respostasGerais = array();
-		foreach($perguntasGerais as $pg){
-			$name = $pg->descricaoId;
-			$respostasGerais[$pg->id] = $request->$name;
-		}
+        $respostasGerais = array();
+        foreach ($perguntasGerais as $pg) {
+            $name = $pg->descricaoId;
+            $respostasGerais[$pg->id] = $request->$name;
+        }
 
-		$respostasAval = array();
-		foreach($perguntasAval as $pa){
-			$name = $pa->descricaoId;
-			$respostasAval[$pa->id] = $request->$name;
-		}
+        $respostasAval = array();
+        foreach ($perguntasAval as $pa) {
+            $name = $pa->descricaoId;
+            $respostasAval[$pa->id] = $request->$name;
+        }
 
-		// Log::info($respostasGerais);
-		// Log::info($respostasAval);
+        // Log::info($respostasGerais);
+        // Log::info($respostasAval);
 
-		// Pegando a presenca com a key
-		$pk = new PresencaKey;
-		$presencaKey = $pk->where('key_auth', '=', $key)->get()->first();
-		if(sizeof($presencaKey) == 0){
-			return redirect("home");
-		}
+        // Pegando a presenca com a key
+        $pk = new PresencaKey;
+        $presencaKey = $pk->where('key_auth', '=', $key)->get()->first();
+        if (sizeof($presencaKey) == 0) {
+            return redirect("home");
+        }
 
-		if(!$presencaKey->used){
-			foreach($perguntasAval as $pa){
-				$a = new Avaliaco;
-				$a->presenca = $presencaKey->presenca;
-				$a->pergunta = $pa->id;
-				$a->resposta = $respostasAval[$pa->id];
-				$a->data =  date("Y-m-d");
-				$a->ip = otherRequest::ip();
-				$a->save();
-			}
+        if (!$presencaKey->used) {
+            foreach ($perguntasAval as $pa) {
+                $a = new Avaliaco;
+                $a->presenca = $presencaKey->presenca;
+                $a->pergunta = $pa->id;
+                $a->resposta = $respostasAval[$pa->id];
+                $a->data =  date("Y-m-d");
+                $a->ip = otherRequest::ip();
+                $a->save();
+            }
 
-			foreach($perguntasGerais as $pg){
-				$a = new Avaliaco;
-				$a->presenca = $presencaKey->presenca;
-				$a->pergunta = $pg->id;
-				$a->resposta = $respostasGerais[$pg->id];
-				$a->data =  date("Y-m-d");
-				$a->ip = otherRequest::ip();
-				$a->save();
-			}
+            foreach ($perguntasGerais as $pg) {
+                $a = new Avaliaco;
+                $a->presenca = $presencaKey->presenca;
+                $a->pergunta = $pg->id;
+                $a->resposta = $respostasGerais[$pg->id];
+                $a->data =  date("Y-m-d");
+                $a->ip = otherRequest::ip();
+                $a->save();
+            }
 
-			$presencaKey->used = true;
-			$presencaKey->save();
-		}
+            $presencaKey->used = true;
+            $presencaKey->save();
+        }
 
-	       return redirect()->route('showAval', $key);
+        return redirect()->route('showAval', $key);
+    }
 
-    	}
+    public function avalShow($key)
+    {
+        $pk = new PresencaKey;
+        $presencaKey = $pk->where('key_auth', '=', $key)->get()->first();
+        if (sizeof($presencaKey) == 0) {
+            return redirect("home");
+        }
 
-    	public function avalShow($key){
-    		$pk = new PresencaKey;
-		$presencaKey = $pk->where('key_auth', '=', $key)->get()->first();
-		if(sizeof($presencaKey) == 0){
-			return redirect("home");
-		}
+        $a = new Avaliaco;
+        $avaliacoes = $a->where('presenca', '=', $presencaKey->presenca)->get();
 
-		$a = new Avaliaco;
-		$avaliacoes = $a->where('presenca', '=', $presencaKey->presenca)->get();
+        $p = new Pergunta;
+        foreach ($avaliacoes as $a) {
+            $id = $a->pergunta;
+            $a->pergunta = $p->where('id', '=', $id)->get()->first()->descricao;
+        }
 
-		$p = new Pergunta;
-		foreach ($avaliacoes as $a) {
-			$id = $a->pergunta;
-			$a->pergunta = $p->where('id', '=', $id)->get()->first()->descricao;
-		}
-
-    		return view('comprovante_avaliacao')->with([
-	       	'key' => $key,
-			'avaliacoes' => $avaliacoes
-	       ]);
-    	}
+        return view('comprovante_avaliacao')->with([
+            'key' => $key,
+            'avaliacoes' => $avaliacoes
+        ]);
+    }
 }
