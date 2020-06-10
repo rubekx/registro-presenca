@@ -99,6 +99,8 @@ class HomeController extends Controller
             'idAtividade'  => 'required|min:1'
         ]);
 
+	info($request);
+
         $id = $request->idAtividade;
 
         $atividade = Atividade::find($id);
@@ -110,6 +112,7 @@ class HomeController extends Controller
             $today = date("Y-m-d");
             $dataAtividade = $atividade->dt;
 
+	    // if(1){
             if(strtotime($dataAtividade)==strtotime($today)){
                 $modalidade = Modalidade::find($atividade->modalidade);
                 $tipo = Tipo::find($atividade->tipo);
@@ -142,6 +145,9 @@ class HomeController extends Controller
          $this->validate($request, [
             'idAtividade'  => 'required|min:1'
         ]);
+
+	info($request);
+
 
         $id = $request->idAtividade;
 
@@ -180,6 +186,10 @@ class HomeController extends Controller
     }
 
     public function getPessoa(Request $request){
+
+	info($request);
+
+
         if(!Session::has('atividade'))
             return redirect("login");
 
@@ -301,6 +311,9 @@ class HomeController extends Controller
     }
 
     public function persistPresenca(Request $request){
+
+	info($request);
+
         if(!Session::has('pessoa'))
             return redirect("home");
 
