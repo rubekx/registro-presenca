@@ -33,7 +33,7 @@
                                 <label for="cbo">CBO:</label>
                             </div>
                             <div class='col-md-10'>
-                                {{ Form::select('cbo', $cbos, null, array('class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Por favor, selecione sua Profissão ...', 'data-parsley-required' => 'true')) }}
+                                {{ Form::select('cbo', $cbos, null, array('class' => 'form-control selectpicker', 'data-live-search' => 'true','data-live-search-normalize' => 'true', 'title' => 'Por favor, selecione sua Profissão ...', 'data-parsley-required' => 'true')) }}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -41,7 +41,7 @@
                                 <label for="estado">Estado:</label>
                             </div>
                             <div class='col-md-5'>
-                                {{ Form::select('estado', $estados, null, array('class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true')) }}
+                                {{ Form::select('estado', $estados, null, array('class' => 'form-control selectpicker', 'data-live-search' => 'true','data-live-search-normalize' => 'true', 'title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true')) }}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -49,7 +49,7 @@
                                 <label for="municipio">Município:</label>
                             </div>
                             <div class='col-md-5'>
-                                <select name="municipio" id="municipio" class="form-control selectpicker"  data-live-search="true" title="Selecione sua cidade ..." data-parsley-required='true'>
+                                <select name="municipio" id="municipio" class="form-control selectpicker"  data-live-search="true" data-live-search-normalize ='true' title="Selecione sua cidade ..." data-parsley-required='true'>
                                     {{-- @foreach ($municipios as $municipio)
                                         <option value="{{ $municipio->ibge }}">{{ $municipio->nome }}</option>
                                     @endforeach --}}
