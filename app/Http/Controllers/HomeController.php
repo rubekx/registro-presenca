@@ -187,14 +187,12 @@ class HomeController extends Controller
 
     public function getPessoa(Request $request)
     {
-
         info($request);
-
-
-        if (!Session::has('atividade'))
-            return redirect("login");
-
-        $search = $request->searchTag;
+        if (isset($request->searchTaghomeForm)) {
+            $search = $request->searchTaghomeForm;
+        } else {
+            $search = $request->searchTag;
+        }
         $pessoa = null;
 
         if ($search != "") {
@@ -207,6 +205,11 @@ class HomeController extends Controller
                 $pessoa = Pessoa::where("cpf", $search)->first(); //Procurando por cpf
                 if ($pessoa != null)
                     $found = true;
+            }
+
+
+            if(isset($request->searchTaghomeForm) && $pessoa == null){
+                return redirect()->route('login');
             }
 
             if ($found) {
@@ -242,7 +245,6 @@ class HomeController extends Controller
                     'ubs' => $ubs
                 ]);
             } else {
-
                 $atividade = Session::get('atividade');
                 $modalidade = Session::get('modalidade');
                 $tipo = Session::get('tipo');
@@ -256,6 +258,7 @@ class HomeController extends Controller
                 ]);
             }
         }
+
 
         $atividade = Session::get('atividade');
         $modalidade = Session::get('modalidade');
@@ -376,15 +379,14 @@ class HomeController extends Controller
         // 	$codigo = $presencaKey->key_auth;
         // }
 
-        if(!PresencaKey::where('presenca',$presenca->id)->exists()){
+        if (!PresencaKey::where('presenca', $presenca->id)->exists()) {
             $presencaKey = new PresencaKey;
             $presencaKey->presenca = $presenca->id;
             $presencaKey->key_auth = md5(uniqid(rand(), true));
             $presencaKey->used = false;
             $presencaKey->save();
-        }
-        else {
-            $presencaKey = PresencaKey::where('presenca',$presenca->id)->get()->first();         
+        } else {
+            $presencaKey = PresencaKey::where('presenca', $presenca->id)->get()->first();
         }
 
         return view('comprovante')->with([

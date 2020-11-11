@@ -221,8 +221,10 @@ class ProfGeralController extends Controller
 
          //message success
         Session::flash('success', 'Profissao atualizada com sucesso!');
-
-        //redirect
+        if(!Session::has('atividade')){
+            return redirect()->route('home');
+        }
+       
         return redirect()->route('profGeral.show', $profGeral->id);
     }
 
