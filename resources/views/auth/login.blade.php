@@ -58,22 +58,23 @@
                 </div>
             </div>
         </div>
-        {{-- {{$teste}} --}}
         @if(isset($firstSearch))
-        <div class="panel panel-default">
-            <div class="panel-heading">Criar Cadastro??</div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                        Pessoa não encontrada!
-                    </div>
-                    <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                        Deseja se cadastrar?
-                    </div>
-                    <div class='col-md-4'>
-                        {{ Form::open(array('route' => 'pessoa.create', 'method' => 'get' )) }}
-                        {{ Form::submit('Sim, Cadastrar!', array('class' => 'btn btn-success')) }}
-                        {{ Form::close() }}
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Criar Cadastro??</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            Pessoa não encontrada!
+                        </div>
+                        <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            Deseja se cadastrar?
+                        </div>
+                        <div class='col-md-4'>
+                            {{ Form::open(array('route' => 'pessoa.create', 'method' => 'get' )) }}
+                            {{ Form::submit('Sim, Cadastrar!', array('class' => 'btn btn-success')) }}
+                            {{ Form::close() }}
+                        </div>
                     </div>
                 </div>
             </div>

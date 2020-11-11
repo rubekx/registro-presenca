@@ -124,7 +124,9 @@ class ProfGeralController extends Controller
         }
 
         $profGeral->save();
-
+        if(!Session::has('atividade')){
+            return redirect()->route('home');
+        }
          //message success
         Session::flash('success', 'Profissao cadastrada com sucesso!');
         Session::put('profGeral', $profGeral);

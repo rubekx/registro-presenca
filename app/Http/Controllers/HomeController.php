@@ -46,8 +46,8 @@ class HomeController extends Controller
         return redirect('login');
     }
 
-    public function getLoginPage()
-    {
+    public function getLoginPage($firstSearch = null)
+    {    
         date_default_timezone_set('America/Fortaleza');
         $today = date("Y-m-d");
         $hora  = date("H:i");
@@ -67,8 +67,10 @@ class HomeController extends Controller
             $ret = (strlen($a->tema) > 60) ? '...' : '';
             $atividades[$a->id] = $tipo->descricao . ' - ' . $tema . $ret;
         }
+        // $userInput = $user != null ? '' : '';
         return view('auth.login')->with([
-            'atividades' => $atividades
+            'atividades' => $atividades,
+            'firstSearch' => $firstSearch
         ]);
     }
 
@@ -208,8 +210,8 @@ class HomeController extends Controller
             }
 
 
-            if(isset($request->searchTaghomeForm) && $pessoa == null){
-                return redirect()->route('login');
+            if (isset($request->searchTaghomeForm) && $pessoa == null) {
+                return $this->getLoginPage(1);
             }
 
             if ($found) {
@@ -258,7 +260,6 @@ class HomeController extends Controller
                 ]);
             }
         }
-
 
         $atividade = Session::get('atividade');
         $modalidade = Session::get('modalidade');
