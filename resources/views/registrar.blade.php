@@ -50,8 +50,10 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					{{ Form::submit('Registrar Presença', array('class' => 'btn btn-primary center-block')) }}
+                    </div>
+                    @if(Session::has('atividade'))
+                        {{ Form::submit('Registrar Presença', array('class' => 'btn btn-primary center-block')) }}
+                    @endif
 				{{ Form::close() }}
 			</div>
 		</div>
