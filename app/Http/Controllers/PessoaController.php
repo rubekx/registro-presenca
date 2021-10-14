@@ -47,10 +47,9 @@ class PessoaController extends Controller
         ]);
 
         $pessoa = new Pessoa;
-
         $pessoa->nome = $request->nome;
         $pessoa->sobrenome = $request->sobrenome;
-        $pessoa->cpf = $request->cpf;
+        $pessoa->cpf = str_replace([" ", ".", "-"], "", $request->cpf);
         $pessoa->email = $request->email;
         $pessoa->celular = $request->celular;
         $pessoa->sexo = $request->sexo;
@@ -123,7 +122,7 @@ class PessoaController extends Controller
 
         $pessoa->nome = $request->nome;
         $pessoa->sobrenome = $request->sobrenome;
-        $pessoa->cpf = $request->cpf;
+        $pessoa->cpf = str_replace([" ", ".", "-"], "", $request->cpf);
         $pessoa->email = $request->email;
         $pessoa->celular = $request->celular;
         $pessoa->sexo = $request->sexo;
