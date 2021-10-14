@@ -204,7 +204,8 @@ class HomeController extends Controller
                 $found = true;
 
             if (!$found) {
-                $pessoa = Pessoa::where("cpf", $search)->first(); //Procurando por cpf
+                $clear_cpf = str_replace([" ", ".", "-"], "", $search);
+                $pessoa = Pessoa::where("cpf", $clear_cpf)->first(); //Procurando por cpf
                 if ($pessoa != null)
                     $found = true;
             }
