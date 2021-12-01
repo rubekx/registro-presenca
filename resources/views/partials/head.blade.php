@@ -12,6 +12,8 @@
 <link href="/css/app.css" rel="stylesheet">
 <link rel="stylesheet" href="/searchit/css/bootstrap-select.css">
 <link href="/css/master.css" rel="stylesheet">
+<link href="/css/dted.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
 @yield('stylesheets')
 
