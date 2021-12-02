@@ -10,7 +10,7 @@
     @yield('content')
     @include('partials.footer')
     @include('partials.scripts')
-    @yield('post-script')
+    @yield('jscript')
 </body>
 
 </html>
