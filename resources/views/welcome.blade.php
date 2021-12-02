@@ -1,14 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- <div class="flex-center position-ref full-height">
-        <div class="content">
-            <div class="links">
-                <a href="{{ url('login') }}">Registrar Presença</a>
-            </div>
-        </div>
-    </div> --}}
-    <div class="content">
-        <img src="img/svg/home/people.svg" class="dted-home-people" alt="dted-logo">
-    </div>
+    <h1 class="dted-home-h1">Registro de presença</h1>
+    <h2 class="dted-home-h2">Registre aqui sua presença em eventos da DTED</h2>
+    <button class="dted-home-button">Entre para procurar seu evento</button>
+    <img src="img/svg/home/people.svg" class="dted-home-people" alt="dted-logo">
 @endsection

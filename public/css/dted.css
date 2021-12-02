@@ -1,7 +1,19 @@
 .dted-header {
-    height: 171px;
+    /* height: 15.83%;
     width: auto;
     border-radius: 0px;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+    background: #8D0333; */
+    height: 171px;
+    width: auto;
+    left: 0px;
+    top: 0px;
+    border-radius: 0px;
+
     position: absolute;
     left: 0%;
     right: 0%;
@@ -17,6 +29,12 @@
     right: 64.62%;
     top: 22.22%;
     bottom: 22.41%;
+    height: 94.67652893066406px;
+    width: 257.25262451171875px;
+    left: 422px;
+    top: 38px;
+    border-radius: 0px;
+
 }
 
 .dted-header-button {
@@ -41,30 +59,138 @@
 
 }
 
+/* .dted-page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.dted-content-wrap {
+    padding-bottom: 2.5rem;
+} */
+
 .dted-home-people {
-    position: absolute;
+    /* position: absolute;
     width: 32%;
     height: 40.9%;
     left: 52.6%;
-    top: 33.61%;
+    top: 33.61%; */
+    position: absolute;
+    width: 618px;
+    height: 442px;
+    left: 1010px;
+    top: 363px;
+}
+
+.dted-home-h1 {
+    position: absolute;
+    width: 647px;
+    height: 240px;
+    left: 422px;
+    top: 344px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 120px;
+    line-height: 120px;
+    display: flex;
+    align-items: center;
+
+    color: #CFA772;
+}
+
+.dted-home-h2 {
+    position: absolute;
+    width: 644px;
+    height: 75px;
+    left: 427px;
+    top: 603px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 74px;
+
+    display: flex;
+    align-items: center;
+}
+
+.dted-home-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    position: absolute;
+    width: 454px;
+    height: 79px;
+    left: 422px;
+    top: 713px;
+    background: #8D0333;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 7px;
 }
 
 .dted-foter {
+    /* position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    background: #8D0333;
+    font-family: Arial;
+    font-size: 18px;
+    color: #FFFFFF; */
+    height: 102px;
+    width: auto;
+    border-radius: 0px;
     position: absolute;
     left: 0%;
     right: 0%;
     top: 90.56%;
     bottom: 0%;
     background: #8D0333;
-    position: absolute;
-    font-family: Arial;
+    font-family: Roboto;
     font-size: 18px;
+    line-height: 21px;
     text-align: center;
+    
+    /* Branco */
+    
     color: #FFFFFF;
 }
 
+
 .dted-foter-text {
-    margin-top: 1em;
+    position: absolute;
+    left: 74.58%;
+    right: 21.98%;
+    top: 94.26%;
+    bottom: 3.61%;
+    vertical-align: middle;
+    font-family: Roboto;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    
+    /* Branco */
+    
+    color: #FFFFFF;
+
+
 }
 
 
