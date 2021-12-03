@@ -2,14 +2,14 @@
 <html lang="pt-br">
 
 <head>
-    @include('partials.head')
+    @include('layouts.header')
 </head>
 
 <body>
-    @include('partials.navbar')
+    @include('layouts.navbar')
     @yield('content')
-    @include('partials.footer')
-    @include('partials.scripts')
+    @include('layouts.footer')
+    @include('layouts.scripts')
     @yield('jscript')
 </body>
 

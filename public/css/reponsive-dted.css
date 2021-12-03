@@ -18,20 +18,13 @@
 
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
-    margin-bottom: 0;
-    border-radius: 0;
+    position: relative;
+    background: #8D0333;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
     height: 450px
-}
-
-/* Set gray background color and 100% height */
-.sidenav {
-    padding-top: 20px;
-    background-color: #f1f1f1;
-    height: 100%;
 }
 
 /* Set black background color, white text and some padding */
@@ -51,4 +44,36 @@ footer {
     .row.content {
         height: auto;
     }
+
+    .dted-header-logo {
+        padding-left: auto;
+        padding-top: auto;
+        padding-bottom: auto;
+    }
+}
+
+.dted-header-logo {
+    padding-left: 23.26%;
+    padding-top: 38px;
+    padding-bottom: 38px;
+    border-radius: 0px
+}
+
+.dted-header-button {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+    color: #8D0333;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+
 }

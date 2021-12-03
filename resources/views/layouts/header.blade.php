@@ -5,8 +5,8 @@
 
 <!-- Styles -->
 <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-{{-- <link href="{{ asset('/css/dted.css') }}" rel="stylesheet"> --}}
 <link href="{{ asset('/css/master.css') }}" rel="stylesheet">
+<link href="{{ asset('/css/reponsive-dted.css') }}" rel="stylesheet">
 <link href="{{ asset('/searchit/css/bootstrap-select.css') }}" rel="stylesheet">
 <!-- Styles -->
 
