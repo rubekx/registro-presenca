@@ -1,54 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Atividade Privada</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/restrict_login') }}">
-                        {{ csrf_field() }}
-
-                        <div>
-                            <p>Para registrar presença nesta atividade é necessário informar a <span style="color: red;">SENHA</span>.</p>
-                        </div>
-
-                        <div class="form-group"> {{-- {{ $errors->has('email') ? ' has-error' : '' }}"> --}}
-                            <label for="idAtividade" class="col-md-4 control-label">Identificador (SENHA):</label>
-
-                            <div class="col-md-6">
-                                <input id="idAtividade" type="idAtividade" class="form-control" name="idAtividade" autocomplete="off" required autofocus>
-
-                                {{-- @if($atividades!=NULL)
-                                    {{ Form::select('idAtividade', $atividades, null, array('class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Por favor, selecione a Atividade ...', 'data-parsley-required' => 'true')) }}
-                                @else
-                                    <input type="text" value="Nenhuma atividade aberta no momento..." readonly="true" class="form-control" />
-                                @endif
- --}}
-                                @if (isset($msg))
-                                    <span class="help-block">
-                                        <strong>{{ $msg }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default dted-search-box">
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Atividade Privada</div>
+                        <h5>Para registrar sua presença neste evento é necessário informar a senha fornecida pela
+                            administração</h5>
+                    </div>
+                    <div class="panel-body">
+                        {!! Form::open(['route' => 'restrict_login', 'method' => 'post', 'class' => 'form']) !!}
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <label for="idAtividade" class="control-label">Senha do Evento</label>
+                            <input id="idAtividade" type="idAtividade" class="form-control dted-search-field"
+                                name="idAtividade" autocomplete="off" required autofocus
+                                placeholder="Digite a senha do evento">
+                            @if (isset($msg))
+                                <span class="help-block">
+                                    <strong>{{ $msg }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <div class="pull-right" style="margin:5px">
+                                <button type="submit" class="btn dted-search-button-submit">
                                     Entrar
                                 </button>
-                                <a href="{{url('login')}}"><button type="button" class="btn btn-primary">
-                                    Voltar
-                                </button></a>
+                                <a href="{{ url('login') }}">
+                                    <button type="button" class="btn dted-search-button-reset">
+                                        Voltar
+                                    </button>
+                                </a>
                             </div>
                         </div>
-                    </form>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
-

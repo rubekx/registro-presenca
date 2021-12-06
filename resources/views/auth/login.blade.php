@@ -3,47 +3,21 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default" style="margin-top: 20%">
-                    <div class="panel-heading dted-search-h1">Busque o seu evento</div>
+            <div class="col-md-8 col-md-offset-2 ">
+                <div class="panel panel-default dted-search-box">
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Busque o seu evento</div>
+                        </div>
                     <div class="panel-body">
-                        {{-- <form class="form-inline" role="form" method="POST" action="{{ url('/home') }}">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label for="idAtividade" class="'col-md-4' control-label">Nome do evento</label>
-                                <div class="col-md-8">
-                                    @if ($atividades != null)
-                                        {{ Form::select('idAtividade', $atividades, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Por favor, selecione a Atividade ...', 'data-parsley-required' => 'true']) }}
-                                    @else
-                                        <input type="text" value="Nenhuma atividade aberta no momento..." readonly="true"
-                                            class="form-control" />
-                                    @endif
-
-                                    @if (isset($msg))
-                                        <span class="help-block">
-                                            <strong>{{ $msg }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary  pull-right">
-                                        Buscar
-                                    </button>
-                                </div>
-                            </div>
-                        </form> --}}
                         <form class="form" role="form" method="POST" action="{{ url('/home') }}">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="idAtividade">Nome do evento</label>
                                 @if ($atividades != null)
-                                    {{ Form::select('idAtividade', $atividades, null, ['class' => 'form-control selectpicker dted-search-select', 'data-live-search' => 'true', 'title' => 'Por favor, selecione a Atividade ...', 'data-parsley-required' => 'true']) }}
+                                    {{ Form::select('idAtividade', $atividades, null, ['class' => 'form-control selectpicker dted-search-field', 'data-live-search' => 'true', 'title' => 'Por favor, selecione a Atividade ...', 'data-parsley-required' => 'true']) }}
                                 @else
                                     <input type="text" value="Nenhuma atividade aberta no momento..." readonly="true"
-                                        class="form-control dted-search-select" />
+                                        class="form-control dted-search-field" />
                                 @endif
                                 @if (isset($msg))
                                     <span class="help-block">
@@ -52,7 +26,7 @@
                                 @endif
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn dted-search-button pull-right">Buscar</button>
+                                <button type="submit" class="btn dted-search-button-submit pull-right">Buscar</button>
                             </div>
                         </form>
                     </div>
@@ -81,7 +55,7 @@
                         {{ Form::close() }}
                     </div>
                 </div>
-            </div> --}}
+            </div>
             @if (isset($firstSearch))
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
@@ -103,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
         </div>
     </div>
     </div>

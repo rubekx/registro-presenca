@@ -65,7 +65,7 @@ class HomeController extends Controller
             $tipo = Tipo::find($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
             $ret = (strlen($a->tema) > 60) ? '...' : '';
-            $atividades[$a->id] = $tipo->descricao . ' - ' . $tema . $ret;
+            $atividades[$a->id] = 'id: '.$a->id.' '.$tipo->descricao . ' - ' . $tema . $ret;
         }
         // $userInput = $user != null ? '' : '';
         return view('auth.login')->with([

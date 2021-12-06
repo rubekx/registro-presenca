@@ -24,7 +24,7 @@
                         {{ Form::close() }}
                     </div>
                 </div>
-                @if (!$firstSearch)
+                @if (!isset($firstSearch))
                     <div class="panel panel-default">
                         <div class="panel-heading">Criar Cadastro??</div>
                         <div class="panel-body">
