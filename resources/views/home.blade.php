@@ -44,7 +44,15 @@
                         </div>
                     </div>
                 @endif
+                <button id='cancelar-registro' class="btn dted-search-button-reset pull-right">Cancelar Cadastro</button>
             </div>
         </div>
     </div>
+@endsection
+@section('jscript')
+    <script type="text/javascript">
+        document.getElementById("cancelar-registro").onclick = function() {
+            location.href = "{{ route('cancelar.registro') }}";
+        };
+    </script>
 @endsection

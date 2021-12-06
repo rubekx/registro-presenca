@@ -47,7 +47,7 @@ class HomeController extends Controller
     }
 
     public function getLoginPage($firstSearch = null)
-    {    
+    {
         date_default_timezone_set('America/Fortaleza');
         $today = date("Y-m-d");
         $hora  = date("H:i");
@@ -65,7 +65,7 @@ class HomeController extends Controller
             $tipo = Tipo::find($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
             $ret = (strlen($a->tema) > 60) ? '...' : '';
-            $atividades[$a->id] = 'id: '.$a->id.' '.$tipo->descricao . ' - ' . $tema . $ret;
+            $atividades[$a->id] = 'id: ' . $a->id . ' ' . $tipo->descricao . ' - ' . $tema . $ret;
         }
         // $userInput = $user != null ? '' : '';
         return view('auth.login')->with([
@@ -552,5 +552,11 @@ class HomeController extends Controller
             'key' => $key,
             'avaliacoes' => $avaliacoes
         ]);
+    }
+
+    public function cancelarRegistroPresenca()
+    {
+        request()->session()->flush();
+        return redirect()->route('login');
     }
 }
