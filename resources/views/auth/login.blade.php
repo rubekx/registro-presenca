@@ -35,7 +35,7 @@
             @if(isset($firstSearch))
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Criar Cadastro??</div>
+                    <div class="panel-heading"><div class=" dted-search-h1"> Cadastro?</div></div>
                     <div class="panel-body">
                         <div class="form-group">
                             <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
@@ -46,7 +46,7 @@
                             </div>
                             <div class='col-md-4'>
                                 {{ Form::open(['route' => 'pessoa.create', 'method' => 'get' ]) }}
-                                {{ Form::submit('Sim, Cadastrar!', array('class' => 'btn btn-success')) }}
+                                {{ Form::submit('Sim, Cadastrar!', array('class' => 'btn btn dted-search-button-submit')) }}
                                 {{ Form::close() }}
                             </div>
                         </div>
