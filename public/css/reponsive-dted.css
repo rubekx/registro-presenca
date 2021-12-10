@@ -139,6 +139,13 @@ footer {
     color: #828282;
 }
 
+.dted-center-box{
+    margin: auto;
+    width: 80%;
+    border: 1px solid #BDBDBD;
+    padding: 10px;
+}
+
 .dted-search-field {
     min-width: 0;
     width: 100%;

@@ -23,7 +23,7 @@
                 </div>
             @endif
 
-            <div class="panel panel-default">
+            <div class="panel panel-default dted-center-box">
                 <div class="panel-heading dted-search-h1">Cadastrar Pessoa</div>
 
                 <div class="panel-body">
