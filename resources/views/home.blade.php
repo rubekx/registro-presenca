@@ -20,7 +20,7 @@
                                 </div>
                                 <div class='col-md-4'>
                                     {{ Form::open(['route' => 'pessoa.create', 'method' => 'get']) }}
-                                    {{ Form::submit('Sim, Cadastrar!', ['class' => 'btn dted-search-button-submit ']) }}
+                                    {{ Form::submit('Sim, Cadastrar!', ['class' => 'btn dted-search-button-submit']) }}
                                     {{ Form::close() }}
                                 </div>
                             </div>

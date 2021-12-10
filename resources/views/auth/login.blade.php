@@ -65,7 +65,7 @@
                                 Deseja se cadastrar?
                             </div>
                             <div class='col-md-4'>
-                                {{ Form::open(array('route' => 'pessoa.create', 'method' => 'get' )) }}
+                                {{ Form::open(['route' => 'pessoa.create', 'method' => 'get' ]) }}
                                 {{ Form::submit('Sim, Cadastrar!', array('class' => 'btn btn-success')) }}
                                 {{ Form::close() }}
                             </div>

@@ -1,4 +1,3 @@
-<hr/>
 	<div style='margin-left: 10px;'>
 		<div class="form-group">
 			<strong>Dados de Profissão</strong>
@@ -27,5 +26,3 @@
 		Html::linkRoute('profGeral.edit', 'Editar Profissão', array($pessoa->id), array('class' => 'btn btn-success btn-block')) :
 		Html::linkRoute('profGeral.create', 'Cadastrar Profissão', array($pessoa->id), array('class' => 'btn btn-danger btn-block'))
 	}} --}}
-
-<hr/>

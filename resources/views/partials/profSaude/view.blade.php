@@ -1,4 +1,3 @@
-<hr/>
 	<div style='margin-left: 10px;'>
 		<div class="form-group">
 			<strong>Dados de Vínculo</strong>
@@ -22,4 +21,3 @@
 		}}
 	{{ Form::close() }} --}}
 
-<hr/>

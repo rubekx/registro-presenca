@@ -1,6 +1,6 @@
 <nav class="navbar">
     <a href="{{ route('logout') }}">
-        <img src="img/svg/header/dted-logo.svg" class="dted-header-logo" alt="dted-logo">
+        <img src="{{ asset('img/svg/header/dted-logo.svg')}}" class="dted-header-logo" alt="dted-logo">
     </a>
     <button id="home-page" type='button' class="btn dted-header-button pull-right">Voltar à página inicial</button>
 </nav>

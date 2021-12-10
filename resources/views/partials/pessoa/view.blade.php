@@ -1,4 +1,3 @@
-<hr/>
   <div style='margin-left: 10px;'>
     <div class="form-group">
       <strong>Dados pessoais</strong>
@@ -41,4 +40,3 @@
 {{--
   {!! Html::linkRoute('pessoa.edit', 'Editar Informações', array($pessoa->id), array('class' => 'btn btn-success btn-block')) !!} --}}
 
-<hr/>
