@@ -5,26 +5,31 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 @include('partials.messages')
-                @include('partials.atividade.info')
-                <div class="panel panel-default">
-                    <div class="panel-heading">Procurar Cadastro</div>
+                <div class="panel panel-default ">
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Busque o seu cadastro</div>
+                    </div>
                     <div class="panel-body">
-                        {{ Form::open(['route' => 'info']) }}
+                        {{ Form::open(['route' => 'info','class'=>'form' ]) }}
                         <div class="form-group">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                                {{ Form::label('searchTag', 'Procure por CPF/EMAIL:') }}
+                            <div class='form-group'>
+                                {{ Form::label('searchTag', 'Informação cadastral') }}
                             </div>
-                            <div class='col-md-4'>
-                                {{ Form::text('searchTag', null, ['class' => 'form-control', 'placeholder' => 'CPF ou EMAIL', 'autocomplete' => 'off']) }}
+                            <div class='form-group'>
+                                {{ Form::text('searchTag', null, ['class' => 'form-control dted-search-field', 'placeholder' => 'Digite seu CPF ou Email', 'autocomplete' => 'off']) }}
                             </div>
-                            <div class='col-md-4'>
-                                {{ Form::submit('Procurar', ['class' => 'btn btn-primary']) }}
+                            <div class='form-group'>
+                                {{ Form::submit('Procurar', ['class' => 'btn dted-search-button-submit  pull-right']) }}
                             </div>
                         </div>
+                        {{-- <hr> --}}
                         {{ Form::close() }}
+                        @include('partials.atividade.info')
                     </div>
+
                 </div>
-                @if (!isset($firstSearch))
+
+                @if (!$firstSearch)
                     <div class="panel panel-default">
                         <div class="panel-heading">Criar Cadastro??</div>
                         <div class="panel-body">
@@ -44,7 +49,7 @@
                         </div>
                     </div>
                 @endif
-                <button id='cancelar-registro' class="btn dted-search-button-reset pull-right">Cancelar Cadastro</button>
+                <button id='cancelar-registro' class="btn dted-search-button-reset pull-right">Cancelar</button>
             </div>
         </div>
     </div>
@@ -52,7 +57,7 @@
 @section('jscript')
     <script type="text/javascript">
         document.getElementById("cancelar-registro").onclick = function() {
-            location.href = "{{ route('cancelar.registro') }}";
+            location.href = "{{ route('logout') }}";
         };
     </script>
 @endsection

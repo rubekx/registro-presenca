@@ -98,15 +98,62 @@ class HomeController extends Controller
         return view('restrict_login');
     }
 
+    public function criptAtividade($str)
+    {
+        $inputlen = strlen($str); // Counts number characters in string $input
+        $randkey = rand(1, 9); // Gets a random number between 1 and 9
+
+        $i = 0;
+        while ($i < $inputlen) {
+
+            $inputchr[$i] = (ord($str[$i]) - $randkey); //encrpytion 
+
+            $i++; // For the loop to function
+        }
+
+        $encrypted = implode('.', $inputchr) . '.' . (ord($randkey) + 50);
+        return $encrypted;
+    }
+
+    public function unCriptAtividade($str)
+    {
+        $input_count = strlen($str);
+        $dec = explode(".", $str); // splits up the string to any array
+        $x = count($dec);
+        $y = $x - 1; // To get the key of the last bit in the array 
+
+        $calc = $dec[$y] - 50;
+        $randkey = chr($calc); // works out the randkey number
+
+        $i = 0;
+        $real = 0;
+        while ($i < $y) {
+
+            $array[$i] = $dec[$i] + $randkey; // Works out the ascii characters actual numbers
+            $real .= chr($array[$i]); //The actual decryption
+
+            $i++;
+        };
+
+        $input = $real;
+        return intval($input);
+    }
+
     public function login(Request $request)
     {
+
+        info('Busque o seu evento');
         $this->validate($request, [
             'idAtividade'  => 'required|min:1'
         ]);
-
         info($request);
 
+
         $id = $request->idAtividade;
+
+        if (!is_numeric($id)) {
+            return  view('auth.login')->with(['msg' => 'Atividade não encontrada...']);
+        }
 
         $atividade = Atividade::find($id);
         if ($atividade == null) {
@@ -116,13 +163,18 @@ class HomeController extends Controller
             $today = date("Y-m-d");
             $dataAtividade = $atividade->dt;
 
-            // if(1){
             if (strtotime($dataAtividade) == strtotime($today)) {
                 $modalidade = Modalidade::find($atividade->modalidade);
                 $tipo = Tipo::find($atividade->tipo);
 
-                if (!($atividade->modalidade == 2 && $atividade->tipo == 22))
-                    return  view('restrict_login');
+                if (!($atividade->modalidade == 2 && $atividade->tipo == 22)) {
+                    $atv_id = $this->criptAtividade($id, strlen($atividade->tema));
+                    return view('restrict_login')
+                        ->with([
+                            'tema' => $atividade->tema,
+                            'atv_id' => $atv_id
+                        ]);
+                }
 
                 $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
                 $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
@@ -146,45 +198,75 @@ class HomeController extends Controller
 
     public function restrictLogin(Request $request)
     {
+
         $this->validate($request, [
-            'idAtividade'  => 'required|min:1'
+            'idAtividade'  => 'required|min:1',
+            /** Senha digitada */
+            'atv_id' => 'required'
+            /** Id da atividade solicitada */
         ]);
 
         info($request);
+        info('uncript valor: ');
+        info($this->unCriptAtividade($request->atv_id));
 
 
         $id = $request->idAtividade;
 
-        $atividade = Atividade::find($id);
-        if ($atividade == null) {
-            // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
-            return  view('restrict_login')->with(['msg' => 'Identificador fornecido não se refere a nenhuma atividade.']);
-        } else {
-            $today = date("Y-m-d");
-            $dataAtividade = $atividade->dt;
-
-            if (strtotime($dataAtividade) == strtotime($today)) {
-                $modalidade = Modalidade::find($atividade->modalidade);
-                $tipo = Tipo::find($atividade->tipo);
-
-                $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
-                $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
-
-                Session::put('atividade', $atividade);
-                Session::put('modalidade', $modalidade);
-                Session::put('tipo', $tipo);
-
-                return view('home')->with([
-                    'modalidade' => $modalidade,
-                    'firstSearch' => true,
-                    'atividade' => $atividade,
-                    'pessoa' => null,
-                    'tipo' => $tipo
-                ]);
-            }
-
-            return  view('restrict_login')->with(['msg' => 'Identificador fornecido não se refere a nenhuma atividade.']);
+        if (!is_numeric($id)) {
+            Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
+            return redirect()->back();
         }
+
+        $atividade = Atividade::find($id);
+
+        if ($atividade == null) {
+            Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
+            return redirect()->back();
+        }
+
+        $atv_id_uncript = $this->unCriptAtividade($request->atv_id);
+        info($atv_id_uncript);
+
+        $atividade_uncript = Atividade::find($atv_id_uncript);
+
+        if ($atividade_uncript == null) {
+            Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
+            return redirect()->back();
+        }
+
+        if ($atv_id_uncript != $id) {
+            $atividade = Atividade::find($atv_id_uncript);
+            return  view('restrict_login')->with([
+                'msg' => 'A senha difere da atividade selecionada',
+                'tema' => $atividade->tema,
+                'atv_id' => $request->atv_id
+            ]);
+        }
+        $today = date("Y-m-d");
+        $dataAtividade = $atividade->dt;
+
+        if (strtotime($dataAtividade) == strtotime($today)) {
+            $modalidade = Modalidade::find($atividade->modalidade);
+            $tipo = Tipo::find($atividade->tipo);
+
+            $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
+            $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
+
+            Session::put('atividade', $atividade);
+            Session::put('modalidade', $modalidade);
+            Session::put('tipo', $tipo);
+
+            return view('home')->with([
+                'modalidade' => $modalidade,
+                'firstSearch' => true,
+                'atividade' => $atividade,
+                'pessoa' => null,
+                'tipo' => $tipo
+            ]);
+        }
+
+        return  view('restrict_login')->with(['msg' => 'A senha fornecido não se refere a nenhuma atividade.']);
     }
 
     public function getPessoa(Request $request)
@@ -196,8 +278,10 @@ class HomeController extends Controller
             $search = $request->searchTag;
         }
         $pessoa = null;
-
+        info(2);
+        info($search);
         if ($search != "") {
+            info(1);
             $found = false;
             $pessoa = Pessoa::where('email', $search)->first(); //Procurando por email
             if ($pessoa != null)
@@ -210,11 +294,12 @@ class HomeController extends Controller
                     $found = true;
             }
 
-
+            info(3);
             if (isset($request->searchTaghomeForm) && $pessoa == null) {
                 return $this->getLoginPage(1);
             }
-
+            info(4);
+            info($found);
             if ($found) {
                 $profGeral = ProfGeral::where("pessoa", $pessoa->id)->first();
                 $profSaude = ProfSaude::where("pessoa", $pessoa->id)->first();
@@ -248,10 +333,14 @@ class HomeController extends Controller
                     'ubs' => $ubs
                 ]);
             } else {
+                info(6);
                 $atividade = Session::get('atividade');
                 $modalidade = Session::get('modalidade');
                 $tipo = Session::get('tipo');
-
+                info($atividade);
+                info($modalidade);
+                info($tipo);
+                info($pessoa);
                 return view('home')->with([
                     'firstSearch' => false,
                     'pessoa' => $pessoa,
@@ -275,10 +364,10 @@ class HomeController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        Session::flush();
-        return redirect('login');
+        request()->session()->flush();
+        return redirect()->route('welcome');
     }
 
     public function getRegistroPage()
@@ -552,11 +641,5 @@ class HomeController extends Controller
             'key' => $key,
             'avaliacoes' => $avaliacoes
         ]);
-    }
-
-    public function cancelarRegistroPresenca()
-    {
-        request()->session()->flush();
-        return redirect()->route('login');
     }
 }

@@ -21,7 +21,7 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
+Route::get('/logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
 Route::get('/login', ['as' => 'login', 'uses' => 'HomeController@getLoginPage']);
 Route::post('/restrict_login', ['as' => 'restrict_login', 'uses' => 'HomeController@restrictLogin']);
 Route::post('/home', ['as' => 'home', 'uses' => 'HomeController@login']);
@@ -39,4 +39,3 @@ Route::get('/profGeral/create/{param}', ['as' => 'cbos', 'uses' => 'ProfGeralCon
 Route::get('/avaliacao/{key}', 'HomeController@getAvalPage');
 Route::post('/comprovante_avaliacao',  ['as' => 'persist_avaliacao', 'uses' => 'HomeController@persistAvaliacao']);
 Route::get('/comprovante_show/{key}',  ['as' => 'showAval', 'uses' => 'HomeController@avalShow']);
-Route::get('/cancelar/registro', 'HomeController@cancelarRegistroPresenca')->name('cancelar.registro');
