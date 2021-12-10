@@ -56,7 +56,7 @@ class PessoaController extends Controller
 
         $pessoa->save();
 
-         //message success
+        //message success
         Session::flash('success', 'Pessoa cadastrada com sucesso!');
         Session::put('pessoa', $pessoa);
 
@@ -101,7 +101,7 @@ class PessoaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-        // $validator = Validator::make($request->all(), [
+            // $validator = Validator::make($request->all(), [
             'nome'  => 'required|min:2|max:20',
             'sobrenome' => 'required|min:2|max:100',
             // 'cpf' => 'required|cpf|unique:pessoa,id,' . $id,
@@ -129,7 +129,7 @@ class PessoaController extends Controller
 
         $pessoa->save();
 
-         //message success
+        //message success
         Session::flash('success', 'Pessoa cadastrada com sucesso!');
 
         //redirect
@@ -145,5 +145,10 @@ class PessoaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function buscarPessoa()
+    {
+        return view('pessoa.buscar');
     }
 }

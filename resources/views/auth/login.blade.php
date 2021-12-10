@@ -27,31 +27,11 @@
                         </form>
                     </div>
                     <div class="dted-search-link">
-                        <a class="pull-left">Edite seus dados cadastrais</a>
-                        <a class="pull-right">Crie seu cadastro</a>
+                        <a class="pull-left" href="{{route('pessoa.buscar')}}">Edite seus dados cadastrais</a>
+                        <a class="pull-right" href="{{route('pessoa.create')}}">Crie seu cadastro</a>
                     </div>
                 </div>
             </div>   
-            {{-- <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Editar dados pessoais</div>
-                    <div class="panel-body">
-                        {{ Form::open(array('route' => 'info' )) }}
-                        <div class="form-group">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                                {{ Form::label('searchTaghomeForm', 'Procure por CPF/EMAIL:') }}
-                            </div>
-                            <div class='col-md-4'>
-                                {{ Form::text('searchTaghomeForm', null, array('class' => 'form-control', 'placeholder' => 'CPF ou EMAIL', 'autocomplete' => 'off')) }}
-                            </div>
-                            <div class='col-md-4'>
-                                {{ Form::submit('Procurar', array('class' => 'btn btn-primary')) }}
-                            </div>
-                        </div>
-                        {{ Form::close() }}
-                    </div>
-                </div>
-            </div> --}}
             @if(isset($firstSearch))
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
