@@ -38,7 +38,7 @@ class ProfGeralController extends Controller
         ])->first();
 
         $tipoParticipante = [
-            1 => 'PARTICIPANTE EXTERNO',
+            // 1 => 'PARTICIPANTE EXTERNO',
             2 => 'UFMA - DISCENTE ',
             3 => 'UFMA - DOCENTE',
             4 => 'UFMA - TÉCNICO',
@@ -125,7 +125,7 @@ class ProfGeralController extends Controller
         $profGeral->pessoa = $pessoa->id;
         $profGeral->cbo = $request->cbo;
         $profGeral->municipio = $request->municipio;
-        $profGeral->tipo_participante = $request->tipo_participante;
+        $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
 
 
         if (strlen($profGeral->cbo) == 1) {
@@ -178,7 +178,7 @@ class ProfGeralController extends Controller
         $munObj = Municipio::find($profGeral->municipio);
 
         $tipoParticipante = [
-            1 => 'PARTICIPANTE EXTERNO',
+            // 1 => 'PARTICIPANTE EXTERNO',
             2 => 'UFMA - DISCENTE ',
             3 => 'UFMA - DOCENTE',
             4 => 'UFMA - TÉCNICO',
@@ -231,7 +231,7 @@ class ProfGeralController extends Controller
         $profGeral->pessoa = $pessoa->id;
         $profGeral->cbo = $request->cbo;
         $profGeral->municipio = $request->municipio;
-        $profGeral->tipo_participante = $request->tipo_participante;
+        $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
 
         if (strlen($profGeral->cbo) == 1) {
             $profGeral->cbo = '00000' . $profGeral->cbo;

@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group row">
                             <div class='col-md-2' style='margin-top: 5px; text-align: left;'>
-                                <label for="tipo_participante">Participante</label>
+                                <label for="tipo_participante">Vínculo</label>
                             </div>
                             <div class='col-md-5'>
                                 {{ Form::select('tipo_participante', $tipoParticipante, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'data-size' => '5', 'title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true']) }}
