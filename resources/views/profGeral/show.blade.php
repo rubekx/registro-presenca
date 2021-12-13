@@ -46,10 +46,10 @@
                         <div class="form-group row">
                             <div class='col-md-4'></div>
                             <div class='col-md-2'>
-                                {!! Html::linkRoute('profGeral.edit', 'Editar', array($profGeral->id), array('class' => 'btn btn-primary btn-block')) !!}
+                                {!! Html::linkRoute('profGeral.edit', 'Editar', array($profGeral->id), array('class' => 'btn dted-search-button-submit btn-block')) !!}
                             </div>
                             <div class='col-md-2'>
-                                {!! Html::linkRoute('registrar', 'Avançar', null, array('class' => 'btn btn-primary btn-block')) !!}
+                                {!! Html::linkRoute('registrar', 'Avançar', null, array('class' => 'btn dted-search-button-submit btn-block')) !!}
                             </div>
                             <div class='col-md-4'></div>
                         </div>

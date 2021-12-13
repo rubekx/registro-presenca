@@ -8,7 +8,9 @@
             <div class="col-md-8 col-md-offset-2">
 
                 <div class="panel panel-default ">
-                    <div class="panel-heading dted-search-h1">Visualizar Informações</div>
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Visualizar Informações</div>
+                    </div>
 
                     <div class="panel-body dted-font">
                         @include('partials.messages')
@@ -26,7 +28,7 @@
                         </div>
                         <div class="form-group " style="clear: both;">
                             @if ($pessoa->email != null && $pessoa->cpf != null && $cbo != null)
-                                {!! Html::linkRoute('pessoa.edit', 'Editar Informações', [$pessoa->id], ['class' => 'btn btn-success center-block']) !!}
+                                {!! Html::linkRoute('pessoa.edit', 'Editar Informações', [$pessoa->id], ['class' => 'btn dted-search-button-submit center-block']) !!}
                             @elseif($pessoa->email == NULL)
                                 <div class="btn-danger" style="padding: 10px; margin-bottom: 10px;">
                                     Não encontramos seu e-mail! <br />
@@ -51,10 +53,11 @@
                         </div>
                         {{ Form::open(['route' => 'registrar']) }}
                         @if ($pessoa->email == null || $pessoa->cpf == null || $cbo == null)
-                            {!! Html::linkRoute('pessoa.edit', 'Editar Informações', [$pessoa->id], ['class' => 'btn btn-success center-block']) !!}
+                            {!! Html::linkRoute('pessoa.edit', 'Editar Informações', [$pessoa->id], ['class' => 'btn dted-search-button-submit center-block']) !!}
                         @else
                             @if (Session::has('atividade'))
                                 {{ Form::submit('Avançar', ['class' => 'btn dted-search-button-submit center-block']) }}
+                                
                             @endif
                         @endif
                         {{ Form::close() }}

@@ -24,20 +24,22 @@
             @endif
 
             <div class="panel panel-default">
-                <div class="panel-heading">Editar Pessoa</div>
+                <div class="panel-heading">
+                    <div class="dted-search-h1">Editar Pessoa</div>
+                </div>
 
-                <div class="panel-body">
+                <div class="panel-body dted-font">
                     {{ Form::model($pessoa, ['route' => ['pessoa.update', $pessoa->id], 'method' => 'PUT', 'data-parsley-validate' => '']) }}
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 {{ Form::label('nome', 'Nome:') }}
                             </div>
-                            <div class='col-md-5'>
+                            <div class='col-md-8'>
                                 {{ Form::text('nome', null, array('class' => 'form-control', 'placeholder' => 'ex.: Maria', 'data-parsley-required' => 'true', "data-parsley-length"=>"[2, 20]" )) }}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 {{ Form::label('sobrenome', 'Sobrenome:') }}
                             </div>
                             <div class='col-md-8'>
@@ -45,41 +47,41 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 {{ Form::label('cpf', 'CPF:') }}
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-8'>
                                 {{ Form::text('cpf', null, array('class' => 'form-control', 'placeholder' => '00000000000', 'data-parsley-required' => 'true', "data-parsley-type" => "digits", "maxlength" =>"11")) }}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 {{ Form::label('email', 'Email:') }}
                             </div>
-                            <div class='col-md-6'>
+                            <div class='col-md-8'>
                                 {{ Form::text('email', null, array('class' => 'form-control', 'placeholder' => 'email@server', 'data-parsley-required' => 'true', 'data-parsley-type' => 'email', "maxlength"=>"100")) }}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 {{ Form::label('celular', 'Celular:') }}
                             </div>
-                            <div class='col-md-3'>
+                            <div class='col-md-8'>
                                 {{ Form::text('celular', null, array('class' => 'form-control', 'placeholder' => '99911112222', "data-parsley-type" => "digits", "maxlength"=>"15")) }}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 {{ Form::label('sexo', 'Sexo:') }}
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-8'>
                                 {{ Form::select('sexo', array('F' => 'Feminino', 'M' => 'Masculino'), null, array('class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class='col-md-4'></div>
                             <div class='col-md-4'>
-                                {{ Form::submit('Salvar', array('class' => 'btn btn-primary btn-block')) }}
+                                {{ Form::submit('Salvar', array('class' => 'btn dted-search-button-submit btn-block')) }}
                             </div>
                             <div class='col-md-4'></div>
                         </div>

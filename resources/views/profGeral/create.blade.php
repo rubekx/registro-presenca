@@ -7,49 +7,61 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
 
-            @include('partials.messages')
+                @include('partials.messages')
 
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-            <div class="panel panel-default">
-                <div class="panel-heading">Cadastrar Profissão e Local de Nascimento</div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Cadastrar Profissão e Local de Nascimento</div>
+                    </div>
 
-                <div class="panel-body">
-                    {{ Form::open(array('route' => 'profGeral.store', 'data-parsley-validate' => '')) }}
+                    <div class="panel-body">
+                        {{ Form::open(['route' => 'profGeral.store', 'data-parsley-validate' => '']) }}
                         <div class="form-group row">
-                            <div class='col-md-2' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-2' style='margin-top: 5px; text-align: left;'>
                                 <label for="cbo">CBO:</label>
                             </div>
                             <div class='col-md-10'>
-                                {{ Form::select('cbo', $cbos, null, array('class' => 'form-control selectpicker', 'data-live-search' => 'true','data-live-search-normalize' => 'true', 'title' => 'Por favor, selecione sua Profissão ...', 'data-parsley-required' => 'true')) }}
+                                {{ Form::select('cbo', $cbos, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'data-size' => '5', 'title' => 'Por favor, selecione sua Profissão ...', 'data-parsley-required' => 'true']) }}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-2'  style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-2' style='margin-top: 5px; text-align: left;'>
+                                <label for="tipo_participante">Participante</label>
+                            </div>
+                            <div class='col-md-5'>
+                                {{ Form::select('tipo_participante', $tipoParticipante, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'data-size' => '5', 'title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true']) }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class='col-md-2' style='margin-top: 5px; text-align: left;'>
                                 <label for="estado">Estado:</label>
                             </div>
                             <div class='col-md-5'>
-                                {{ Form::select('estado', $estados, null, array('class' => 'form-control selectpicker', 'data-live-search' => 'true','data-live-search-normalize' => 'true', 'title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true')) }}
+                                {{ Form::select('estado', $estados, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'data-size' => '5', 'title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true']) }}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-2'  style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-2' style='margin-top: 5px; text-align: left;'>
                                 <label for="municipio">Município:</label>
                             </div>
                             <div class='col-md-5'>
-                                <select name="municipio" id="municipio" class="form-control selectpicker"  data-live-search="true" data-live-search-normalize ='true' title="Selecione sua cidade ..." data-parsley-required='true'>
+                                <select name="municipio" id="municipio" class="form-control selectpicker"
+                                    data-live-search="true" data-size='5' data-live-search-normalize='true'
+                                    title="Selecione sua cidade ..." data-parsley-required='true'>
                                     {{-- @foreach ($municipios as $municipio)
                                         <option value="{{ $municipio->ibge }}">{{ $municipio->nome }}</option>
                                     @endforeach --}}
@@ -59,33 +71,34 @@
                         <div class="form-group row">
                             <div class='col-md-4'></div>
                             <div class='col-md-4'>
-                                {{ Form::submit('Cadastrar', array('class' => 'btn btn-primary btn-block')) }}
+                                {{ Form::submit('Cadastrar', ['class' => 'btn dted-search-button-submit btn-block']) }}
                             </div>
                             <div class='col-md-4'></div>
                         </div>
-                    {{ Form::close() }}
+                        {{ Form::close() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('post-script')
 
     <script type="text/javascript">
-        $('select[name=estado]').change(function () {
+        $('select[name=estado]').change(function() {
             var idEstado = $(this).val();
-            $.get('/get-municipios/' + idEstado, function (municipios) {
+            $.get('/get-municipios/' + idEstado, function(municipios) {
                 $('select[name=municipio]').empty();
-                $.each(municipios, function (key, value) {
-                    $('select[name=municipio]').append('<option value=' + value.ibge + '>' + value.nome + '</option>');
+                $.each(municipios, function(key, value) {
+                    $('select[name=municipio]').append('<option value=' + value.ibge + '>' + value
+                        .nome + '</option>');
                 });
                 $('select[name=municipio]').selectpicker('refresh');
             });
         });
     </script>
 
-    {!! Html::script("js/parsley.min.js") !!}
+    {!! Html::script('js/parsley.min.js') !!}
 
 @endsection

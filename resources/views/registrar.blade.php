@@ -11,12 +11,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2  dted-font">
 
                 {{ Form::open(['route' => 'persist', 'data-parsley-validate' => '']) }}
                 <div class="panel panel-default">
-                    <div class="panel-heading dted-search-h1">Informe de onde você está acessando</div>
-                    <div class="panel-body dted-font">
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Informe de onde você está acessando</div>
+                       </div>
+                    <div class="panel-body">
                         @include('partials.messages')
 
                         <div class="form-group">
@@ -34,7 +36,7 @@
                                     <label for="estado">Estado:</label>
                                 </div>
                                 <div class='col-md-5'>
-                                    {{ Form::select('estado', $estados, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true']) }}
+                                    {{ Form::select('estado', $estados, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'data-size' => '5','title' => 'Por favor, selecione seu estado ...', 'data-parsley-required' => 'true']) }}
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -43,7 +45,7 @@
                                 </div>
                                 <div class='col-md-5'>
                                     <select name="municipio" id="municipio" class="form-control selectpicker"
-                                        data-live-search="true" data-live-search-normalize='true'
+                                        data-live-search="true" data-live-search-normalize='true' data-size ='5',
                                         title="Selecione sua cidade ..." data-parsley-required='true'>
                                         {{-- @foreach ($municipios as $municipio)
                                                                   <option value="{{ $municipio->ibge }}">{{ $municipio->nome }}</option>

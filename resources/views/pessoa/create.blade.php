@@ -24,9 +24,11 @@
             @endif
 
             <div class="panel panel-default dted-center-box">
-                <div class="panel-heading dted-search-h1">Cadastrar Pessoa</div>
+                <div class="panel-heading">
+                    <div class="dted-search-h1">Cadastrar Pessoa</div>
+                </div>
 
-                <div class="panel-body">
+                <div class="panel-body dted-font">
                     {{ Form::open(array('route' => ['pessoa.store'], 'data-parsley-validate' => '')) }}
                         <div class="form-group row">
                             <div class='col-md-3' style='margin-top: 5px; text-align: left;'>

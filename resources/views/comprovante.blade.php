@@ -7,8 +7,10 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default dted-font">
-                    <div class="panel-heading dted-search-h1">Comprovante de Presença</div>
-                    <div class="panel-body">
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Comprovante de Presença</div>
+                    </div>
+                    <div class="panel-body dted-font">
                         <h2 style="margin: 20px auto; text-align: center; width: 400px; color: #27AE60;">Presença
                             confirmada!
                         </h2>
