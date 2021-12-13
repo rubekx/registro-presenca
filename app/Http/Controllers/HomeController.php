@@ -141,13 +141,9 @@ class HomeController extends Controller
 
     public function login(Request $request)
     {
-
-        info('Busque o seu evento');
         $this->validate($request, [
             'idAtividade'  => 'required|min:1'
         ]);
-        info($request);
-
 
         $id = $request->idAtividade;
 
@@ -372,15 +368,20 @@ class HomeController extends Controller
 
     public function getRegistroPage()
     {
+
         if (!Session::has('pessoa'))
             return redirect("home");
 
-        // $ipAddress = $_SERVER['REMOTE_ADDR'];
-        // if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
-        //     $ipAddress = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
-        // }
+        $tipoParticipante = [
+            // 1 => 'PARTICIPANTE EXTERNO',
+            2 => 'UFMA - DISCENTE ',
+            3 => 'UFMA - DOCENTE',
+            4 => 'UFMA - TÉCNICO',
+        ];
 
-        // $ipAddress = otherRequest::ip();
+        $pessoa = Session::get('pessoa');
+        $profGeral = ProfGeral::where("pessoa", $pessoa->id)->first();
+
         $request = otherRequest::instance();
         $request->setTrustedProxies([
             otherRequest::server('REMOTE_ADDR'),
@@ -400,7 +401,9 @@ class HomeController extends Controller
         }
 
         return view('registrar')->with([
+            'tipoParticipante' => $tipoParticipante,
             'estados' => $arrayEstados,
+            'profGeral' => $profGeral,
             'municipios' => $arrayMun,
             'ip' => $ipAddress
         ]);
@@ -408,11 +411,10 @@ class HomeController extends Controller
 
     public function persistPresenca(Request $request)
     {
-
         info($request);
 
         if (!Session::has('pessoa'))
-            return redirect("home");
+            return redirect()->route("logout");
 
         $ip = $request->ip;
         $estado = $request->estado;
@@ -421,6 +423,17 @@ class HomeController extends Controller
         $pessoa = Session::get('pessoa');
         $profSaude = Session::get('profSaude');
         $ubs = null;
+
+        $profGeral = ProfGeral::where('pessoa', $pessoa->id)->whereNull('tipo_participante')->first();
+
+        if ($profGeral != null) {
+            if ($request->vinculo_ufma == 'on') {
+                $profGeral->tipo_participante = $request->tipo_participante;
+            } else {
+                $profGeral->tipo_participante = 1;
+            }
+            $profGeral->save();
+        }
 
         if ($profSaude != null)
             $ubs = $profSaude->ubs;

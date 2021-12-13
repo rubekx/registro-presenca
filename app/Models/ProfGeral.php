@@ -26,7 +26,8 @@ class ProfGeral extends Model
     protected $fillable = [
         'pessoa',
         'cbo',
-        'municipio'
+        'municipio',
+        'tipo_participante'
     ];
 
     protected $guarded = [];

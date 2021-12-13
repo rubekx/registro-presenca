@@ -2,7 +2,7 @@
 {{-- <div style='margin-left: 10px;'> --}}
 <div>
     <div class="form-group">
-        <strong>Dados do evento - {{ $atividade->tema }}</strong>
+        <strong>Dados do evento: </strong> {{ $atividade->tema }}
     </div>
     <div class="form-group">
         <strong>ID:</strong> {{ $atividade->id }}
