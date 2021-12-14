@@ -3,8 +3,8 @@
 @section('title', 'Visualizar Informações')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+    <div class="container h-50 transform-center-parent">
+        <div class="row transform-center">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default ">
                     <div class="panel-heading">
@@ -57,9 +57,9 @@
                     </div>
                 </div>
                 @if ($pessoa->email != null && $pessoa->cpf != null && $cbo != null)
-                <div class="dted-search-link">
-                    {!! Html::linkRoute('pessoa.edit', 'Edite seus dados cadastrais', [$pessoa->id], ['class' => 'pull-left']) !!}
-                </div>
+                    <div class="dted-search-link">
+                        {!! Html::linkRoute('pessoa.edit', 'Edite seus dados cadastrais', [$pessoa->id], ['class' => 'pull-left']) !!}
+                    </div>
                 @endif
             </div>
         </div>
