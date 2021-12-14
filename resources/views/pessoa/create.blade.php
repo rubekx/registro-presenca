@@ -7,8 +7,8 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
+<div class="container h-50 transform-center-parent">
+    <div class="row transform-center">
         <div class="col-md-8 col-md-offset-2">
 
             @include('partials.messages')
