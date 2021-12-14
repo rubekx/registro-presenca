@@ -43,7 +43,7 @@
                             <div class=" dted-search-h1"> Cadastro?</div>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group">
+                            <div class="form-group dted-font">
                                 <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
                                     Pessoa não encontrada!
                                 </div>
