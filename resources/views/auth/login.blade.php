@@ -16,7 +16,7 @@
                                 </div>
                                 <div class='col-md-9'>
                                     @if (isset($atividades))
-                                        {{ Form::select('idAtividade', $atividades, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Por favor, selecione a Atividade ...', 'data-parsley-required' => 'true']) }}
+                                        {{ Form::select('idAtividade', $atividades, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'title' => 'Por favor, selecione a Atividade ...', 'data-size' => '4', 'data-parsley-required' => 'true']) }}
                                     @else
                                         <input type="text" value="Nenhuma atividade aberta no momento..." readonly="true"
                                             class="form-control" />
