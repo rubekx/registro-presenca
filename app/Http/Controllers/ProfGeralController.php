@@ -38,8 +38,8 @@ class ProfGeralController extends Controller
         ])->first();
 
         $tipoParticipante = [
-            // 1 => 'PARTICIPANTE EXTERNO',
-            2 => 'UFMA - DISCENTE ',
+            1 => 'PARTICIPANTE EXTERNO',
+            2 => 'UFMA - DISCENTE',
             3 => 'UFMA - DOCENTE',
             4 => 'UFMA - TÉCNICO',
         ];
@@ -178,8 +178,8 @@ class ProfGeralController extends Controller
         $munObj = Municipio::find($profGeral->municipio);
 
         $tipoParticipante = [
-            // 1 => 'PARTICIPANTE EXTERNO',
-            2 => 'UFMA - DISCENTE ',
+            1 => 'PARTICIPANTE EXTERNO',
+            2 => 'UFMA - DISCENTE',
             3 => 'UFMA - DOCENTE',
             4 => 'UFMA - TÉCNICO',
         ];
@@ -207,7 +207,7 @@ class ProfGeralController extends Controller
             'profGeral' => $profGeral,
             'cbos' => $arrayCbos,
             'estados' => $arrayEstados,
-            'municipios' => $municipios,
+            // 'municipios' => $municipios,
             'arrayCbos' => $arrayCbos,
             'arrayEstados' => $arrayEstados,
             'arrayMun' => $arrayMun,

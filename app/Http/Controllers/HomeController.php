@@ -373,8 +373,8 @@ class HomeController extends Controller
             return redirect("home");
 
         $tipoParticipante = [
-            // 1 => 'PARTICIPANTE EXTERNO',
-            2 => 'UFMA - DISCENTE ',
+            1 => 'PARTICIPANTE EXTERNO',
+            2 => 'UFMA - DISCENTE',
             3 => 'UFMA - DOCENTE',
             4 => 'UFMA - TÉCNICO',
         ];
