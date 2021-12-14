@@ -61,14 +61,6 @@
 @endsection
 
 @section('post-script')
-
-{{--     <script type="text/javascript">
-        $('.selectpicker').selectpicker({
-          style: 'btn-info',
-          size: 4
-        });
-    </script> --}}
-
     <script type="text/javascript">
         $('select[name=estado]').change(function () {
             var idEstado = $(this).val();

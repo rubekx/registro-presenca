@@ -70,16 +70,6 @@
 @endsection
 @section('post-script')
     <script type="text/javascript">
-        $('select[name=estado]').ready(function() {
-            $.get('/get-municipios/' + {{ $currEstado }}, function(municipios) {
-                $('select[name=municipio]').empty();
-                $.each(municipios, function(key, value) {
-                    $('select[name=municipio]').append('<option value=' + value.ibge + '>' + value
-                        .nome + '</option>');
-                });
-                $('select[name=municipio]').selectpicker('refresh');
-            });
-        });
         $('select[name=estado]').change(function() {
             var idEstado = $(this).val();
             $.get('/get-municipios/' + idEstado, function(municipios) {
