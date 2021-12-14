@@ -11,13 +11,3 @@
 			{{ isset($ubs) ? $ubs->nome : 'Não Cadastrado' }}
 		</div>
 	</div>
-
-{{-- 	{{ Form::open(array('route' => null)) }}
-		{{ Form::hidden('idPessoa', $pessoa->id) }}
-		{{
-			isset($profSaude) ?
-			Form::submit('Editar Vínculo', array('class' => 'btn btn-success')) :
-			Form::submit('Cadastrar Vínculo', array('class' => 'btn btn-danger'))
-		}}
-	{{ Form::close() }} --}}
-

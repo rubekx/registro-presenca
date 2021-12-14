@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+<div class="container h-50 transform-center-parent">
+    <div class="row transform-center">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default dted-search-box">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="dted-search-h1">Atividade Privada </div>
                         <h5 class="dted-font">Para registrar sua presença neste evento é necessário informar a senha fornecida pela

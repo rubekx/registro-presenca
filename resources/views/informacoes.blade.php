@@ -6,25 +6,23 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-
                 <div class="panel panel-default ">
                     <div class="panel-heading">
                         <div class="dted-search-h1">Confirme seus dados cadastrais</div>
                     </div>
-
                     <div class="panel-body dted-font">
                         @include('partials.messages')
 
-                        <div class="form-group">
-                            <div class='col-md-4'>
+                        <div class="form-group row">
+                            <div class='col-md-6'>
                                 @include('partials.pessoa.view')
                             </div>
-                            <div class='col-md-4'>
+                            <div class='col-md-6'>
                                 @include('partials.profGeral.view')
                             </div>
-                            <div class='col-md-4'>
+                            {{-- <div class='col-md-4'>
                                 @include('partials.profSaude.view')
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="form-group " style="clear: both;">
                             @if ($pessoa->email != null && $pessoa->cpf != null && $cbo != null)

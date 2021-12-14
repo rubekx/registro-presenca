@@ -1,32 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container dted-font">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                @include('partials.messages')
-                @if (!$firstSearch)
+    <div class="container h-50 transform-center-parent">
+        <div class="row transform-center">
+            @include('partials.messages')
+            @if (!$firstSearch)
+                <div class="col-md-8 col-md-offset-2" style="padding-top: 10%">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="dted-search-h1">Criar Cadastro?</div>
-                        </div>
                         <div class="panel-body">
-                            <div class="form-group  dted-font">
-                                <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                                    Pessoa não encontrada!
+                            <div class="form-group row dted-font">
+                                {{ Form::open(['route' => 'pessoa.create', 'method' => 'get']) }}
+                                <div class='col-md-8' style='margin-top: 5px; text-align: left;'>
+                                    <div class="dted-search-h1 text-center">Pessoa não encontrada, deseja se cadastrar?
+                                    </div>
                                 </div>
-                                <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                                    Deseja se cadastrar?
-                                </div>
-                                <div class='col-md-4'>
-                                    {{ Form::open(['route' => 'pessoa.create', 'method' => 'get']) }}
+                                <div class="col-md-2"  style='margin-top: 5px;'>
                                     {{ Form::submit('Sim, Cadastrar!', ['class' => 'btn dted-search-button-submit']) }}
-                                    {{ Form::close() }}
                                 </div>
+                                {{ Form::close() }}
                             </div>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
+            <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="dted-search-h1">Busque o seu cadastro</div>
