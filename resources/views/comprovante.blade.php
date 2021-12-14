@@ -11,8 +11,8 @@
                         <div class="dted-search-h1">Comprovante de Presença</div>
                     </div>
                     <div class="panel-body dted-font">
-                        <h2 style="margin: 20px auto; text-align: center; width: 400px; color: #27AE60;">Presença
-                            confirmada!
+                        <h2 style="margin: 20px auto; text-align: center; width: 400px; color: #27AE60;">
+                            <b>Presença confirmada!</b>
                         </h2>
                         @include('partials.messages')
 

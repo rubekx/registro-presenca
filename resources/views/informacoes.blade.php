@@ -9,7 +9,7 @@
 
                 <div class="panel panel-default ">
                     <div class="panel-heading">
-                        <div class="dted-search-h1">Visualizar Informações</div>
+                        <div class="dted-search-h1">Confirme seus dados cadastrais</div>
                     </div>
 
                     <div class="panel-body dted-font">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group " style="clear: both;">
                             @if ($pessoa->email != null && $pessoa->cpf != null && $cbo != null)
-                                {!! Html::linkRoute('pessoa.edit', 'Editar Informações', [$pessoa->id], ['class' => 'btn dted-search-button-submit center-block']) !!}
+                                {{-- {!! Html::linkRoute('pessoa.edit', 'Editar Informações', [$pessoa->id], ['class' => 'btn dted-search-button-submit center-block']) !!} --}}
                             @elseif($pessoa->email == NULL)
                                 <div class="btn-danger" style="padding: 10px; margin-bottom: 10px;">
                                     Não encontramos seu e-mail! <br />
@@ -52,18 +52,17 @@
                             @endif
                         </div>
                         {{ Form::open(['route' => 'registrar']) }}
-                        @if ($pessoa->email == null || $pessoa->cpf == null || $cbo == null)
-                            {!! Html::linkRoute('pessoa.edit', 'Editar Informações', [$pessoa->id], ['class' => 'btn dted-search-button-submit center-block']) !!}
-                        @else
-                            @if (Session::has('atividade'))
-                                {{ Form::submit('Avançar', ['class' => 'btn dted-search-button-submit center-block']) }}
-                                
-                            @endif
+                        @if (Session::has('atividade'))
+                            {{ Form::submit('Avançar', ['class' => 'btn dted-search-button-submit center-block']) }}
                         @endif
                         {{ Form::close() }}
                     </div>
-
                 </div>
+                @if ($pessoa->email != null && $pessoa->cpf != null && $cbo != null)
+                <div class="dted-search-link">
+                    {!! Html::linkRoute('pessoa.edit', 'Edite seus dados cadastrais', [$pessoa->id], ['class' => 'pull-left']) !!}
+                </div>
+                @endif
             </div>
         </div>
     </div>

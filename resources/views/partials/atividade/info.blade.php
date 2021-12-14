@@ -1,6 +1,4 @@
-{{-- <hr/> --}}
-{{-- <div style='margin-left: 10px;'> --}}
-<div>
+<div class="dted-font">
     <div class="form-group">
         <strong>Dados do evento: </strong> {{ $atividade->tema }}
     </div>
@@ -20,4 +18,3 @@
         <strong>Modalidade/Tipo:</strong> {{ $modalidade->descricao }} - {{ $tipo->descricao }}
     </div>
 </div>
-{{-- <hr/> --}}

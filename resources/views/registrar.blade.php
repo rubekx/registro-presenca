@@ -66,10 +66,7 @@
                                 <div class='col-md-8'>
                                     <select name="municipio" id="municipio" class="form-control selectpicker"
                                         data-live-search="true" data-live-search-normalize='true' data-size='5' ,
-                                        title="Selecione sua cidade ..." data-parsley-required='true'>
-                                        {{-- @foreach ($municipios as $municipio)
-                                                                  <option value="{{ $municipio->ibge }}">{{ $municipio->nome }}</option>
-                                                              @endforeach --}}
+                                        title="Selecione sua cidade ..." data-parsley-required='true'>                
                                     </select>
                                 </div>
                             </div>

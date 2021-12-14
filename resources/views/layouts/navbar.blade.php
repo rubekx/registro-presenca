@@ -6,8 +6,8 @@
 </nav>
 @section('jscript-header')
     <script type="text/javascript">
-        document.getElementById("home-page").onclick = function() {
+        $("#home-page").click(function() {
             location.href = "{{ route('logout') }}";
-        };
+        });
     </script>
 @endsection
