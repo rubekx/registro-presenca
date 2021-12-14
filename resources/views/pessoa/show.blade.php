@@ -10,12 +10,10 @@
 <div class="container h-50 transform-center-parent">
     <div class="row transform-center">
         <div class="col-md-8 col-md-offset-2">
-
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="dted-search-h1">Mostrar Cadastro de Pessoa</div>                    
                     </div>
-
                     <div class="panel-body dted-font">
                         <div class="form-group row">
                             <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
@@ -67,10 +65,10 @@
                         </div>
                         <div class="form-group row">
                             <div class='col-md-4'></div>
-                            <div class='col-md-2'>
+                            <div class='col-md-2' style='margin-top: 10px;'>
                                 {!! Html::linkRoute('pessoa.edit', 'Editar', [$pessoa->id], ['class' => 'btn dted-search-button-submit btn-block']) !!}
                             </div>
-                            <div class='col-md-2'>
+                            <div class='col-md-2' style='margin-top: 10px;'>
                                 {!! Html::linkRoute('profGeral.create', 'Avançar', null, ['class' => 'btn dted-search-button-submit btn-block']) !!}
                             </div>
                             <div class='col-md-4'></div>
