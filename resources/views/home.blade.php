@@ -3,17 +3,16 @@
     <div class="container h-50 transform-center-parent">
         <div class="row transform-center">
             @include('partials.messages')
-            @if (!$firstSearch)
+            @if (isset($firstSearch))
                 <div class="col-md-8 col-md-offset-2 dted-cadastrar-usuario">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="form-group row dted-font">
                                 {{ Form::open(['route' => 'pessoa.create', 'method' => 'get']) }}
-                                <div class='col-md-8' >
-                                    <div class="dted-search-h1">Pessoa não encontrada, deseja se cadastrar?
-                                    </div>
+                                <div class='col-md-8'>
+                                    <div class="dted-search-h1">Pessoa não encontrada, deseja se cadastrar?</div>
                                 </div>
-                                <div class="col-md-2"  style='margin-top: 5px;'>
+                                <div class="col-md-2" style='margin-top: 5px;'>
                                     {{ Form::submit('Sim, Cadastrar!', ['class' => 'btn dted-search-button-submit']) }}
                                 </div>
                                 {{ Form::close() }}

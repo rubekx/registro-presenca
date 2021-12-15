@@ -39,6 +39,7 @@ class HomeController extends Controller
             return view('home')->with([
                 'atividade' => $atividade,
                 'modalidade' => $modalidade,
+                'firstSearch' => null,
                 'tipo' => $tipo
             ]);
         }
