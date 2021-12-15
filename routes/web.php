@@ -18,10 +18,10 @@ if (env('APP_ENV') === 'production') {
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-Route::get('/home', 'HomeController@index');
-Route::post('/logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
 Route::get('/login', ['as' => 'login', 'uses' => 'HomeController@getLoginPage']);
 Route::post('/restrict_login', ['as' => 'restrict_login', 'uses' => 'HomeController@restrictLogin']);
 Route::post('/home', ['as' => 'home', 'uses' => 'HomeController@login']);
@@ -32,6 +32,7 @@ Route::get('/registrar', ['as' => 'registrar', 'uses' => 'HomeController@getRegi
 Route::get('/get-municipios/{idEstado}', 'MunicipioController@getMunicipios');
 Route::post('/comprovante',  ['as' => 'persist', 'uses' => 'HomeController@persistPresenca']);
 Route::resource('pessoa', 'PessoaController');
+Route::get('/buscar/pessoa', 'PessoaController@buscarPessoa')->name('pessoa.buscar');
 Route::resource('profGeral', 'ProfGeralController');
 Route::get('/profGeral/create/{param}', ['as' => 'cbos', 'uses' => 'ProfGeralController@getCbos']);
 // Route::post('/pessoa/cadastrar', ['as' => 'pessoa.cadastrar', 'uses' => 'HomeController@getPessoaPage']);
