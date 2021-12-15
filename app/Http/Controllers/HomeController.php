@@ -61,8 +61,8 @@ class HomeController extends Controller
         ])->get();
         $atividades = array();
         foreach ($atvs as $a) {
-            $modalidade = Modalidade::find($a->modalidade);
-            $tipo = Tipo::find($a->tipo);
+            $modalidade = Modalidade::findOrFail($a->modalidade);
+            $tipo = Tipo::findOrFail($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
             $ret = (strlen($a->tema) > 60) ? '...' : '';
             $atividades[$a->id] = $tipo->descricao . ' - ' . $tema . $ret;
@@ -89,8 +89,8 @@ class HomeController extends Controller
         ])->get();
         $atividades = array();
         foreach ($atvs as $a) {
-            $modalidade = Modalidade::find($a->modalidade);
-            $tipo = Tipo::find($a->tipo);
+            $modalidade = Modalidade::findOrFail($a->modalidade);
+            $tipo = Tipo::findOrFail($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
             $ret = (strlen($a->tema) > 60) ? '...' : '';
             $atividades[$a->id] = $tipo->descricao . ' - ' . $tema . $ret;
@@ -100,17 +100,13 @@ class HomeController extends Controller
 
     public function criptAtividade($str)
     {
-        $inputlen = strlen($str); // Counts number characters in string $input
-        $randkey = rand(1, 9); // Gets a random number between 1 and 9
-
+        $inputlen = strlen($str);
+        $randkey = rand(1, 9);
         $i = 0;
         while ($i < $inputlen) {
-
-            $inputchr[$i] = (ord($str[$i]) - $randkey); //encrpytion 
-
-            $i++; // For the loop to function
+            $inputchr[$i] = (ord($str[$i]) - $randkey);
+            $i++;
         }
-
         $encrypted = implode('.', $inputchr) . '.' . (ord($randkey) + 50);
         return $encrypted;
     }
@@ -118,23 +114,18 @@ class HomeController extends Controller
     public function unCriptAtividade($str)
     {
         $input_count = strlen($str);
-        $dec = explode(".", $str); // splits up the string to any array
+        $dec = explode(".", $str);
         $x = count($dec);
-        $y = $x - 1; // To get the key of the last bit in the array 
-
+        $y = $x - 1;
         $calc = $dec[$y] - 50;
-        $randkey = chr($calc); // works out the randkey number
-
+        $randkey = chr($calc);
         $i = 0;
         $real = 0;
         while ($i < $y) {
-
-            $array[$i] = $dec[$i] + $randkey; // Works out the ascii characters actual numbers
-            $real .= chr($array[$i]); //The actual decryption
-
+            $array[$i] = $dec[$i] + $randkey;
+            $real .= chr($array[$i]);
             $i++;
         };
-
         $input = $real;
         return intval($input);
     }
@@ -151,7 +142,7 @@ class HomeController extends Controller
             return  view('auth.login')->with(['msg' => 'Atividade não encontrada...']);
         }
 
-        $atividade = Atividade::find($id);
+        $atividade = Atividade::findOrFail($id);
         if ($atividade == null) {
             // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
             return  view('auth.login')->with(['msg' => 'Atividade não encontrada...']);
@@ -160,8 +151,8 @@ class HomeController extends Controller
             $dataAtividade = $atividade->dt;
 
             if (strtotime($dataAtividade) == strtotime($today)) {
-                $modalidade = Modalidade::find($atividade->modalidade);
-                $tipo = Tipo::find($atividade->tipo);
+                $modalidade = Modalidade::findOrFail($atividade->modalidade);
+                $tipo = Tipo::findOrFail($atividade->tipo);
 
                 if (!($atividade->modalidade == 2 && $atividade->tipo == 22)) {
                     $atv_id = $this->criptAtividade($id, strlen($atividade->tema));
@@ -214,7 +205,7 @@ class HomeController extends Controller
             return redirect()->back();
         }
 
-        $atividade = Atividade::find($id);
+        $atividade = Atividade::findOrFail($id);
 
         if ($atividade == null) {
             Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
@@ -224,7 +215,7 @@ class HomeController extends Controller
         $atv_id_uncript = $this->unCriptAtividade($request->atv_id);
         info($atv_id_uncript);
 
-        $atividade_uncript = Atividade::find($atv_id_uncript);
+        $atividade_uncript = Atividade::findOrFail($atv_id_uncript);
 
         if ($atividade_uncript == null) {
             Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
@@ -232,7 +223,7 @@ class HomeController extends Controller
         }
 
         if ($atv_id_uncript != $id) {
-            $atividade = Atividade::find($atv_id_uncript);
+            $atividade = Atividade::findOrFail($atv_id_uncript);
             return  view('restrict_login')->with([
                 'msg' => 'A senha difere da atividade selecionada',
                 'tema' => $atividade->tema,
@@ -243,8 +234,8 @@ class HomeController extends Controller
         $dataAtividade = $atividade->dt;
 
         if (strtotime($dataAtividade) == strtotime($today)) {
-            $modalidade = Modalidade::find($atividade->modalidade);
-            $tipo = Tipo::find($atividade->tipo);
+            $modalidade = Modalidade::findOrFail($atividade->modalidade);
+            $tipo = Tipo::findOrFail($atividade->tipo);
 
             $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
             $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
@@ -454,13 +445,13 @@ class HomeController extends Controller
         $presenca->save();
 
         $atividade = $atividade->tema;
-        $pessoa = Pessoa::find($presenca->pessoa);
+        $pessoa = Pessoa::findOrFail($presenca->pessoa);
         $pessoa = $pessoa->nome . ' ' . $pessoa->sobrenome;
-        $local = Municipio::find($presenca->local);
-        $estado = Estado::find($local->uf);
+        $local = Municipio::findOrFail($presenca->local);
+        $estado = Estado::findOrFail($local->uf);
         $local = $local->nome . '/' . $estado->sigla;
         if ($ubs != null)
-            $ubs = Municipio::find($presenca->ubs);
+            $ubs = Municipio::findOrFail($presenca->ubs);
 
         // $presencaKey = new PresencaKey;
         // $key = $presencaKey->where([
@@ -550,9 +541,9 @@ class HomeController extends Controller
                 $perguntasAval = $p->where('tipo_avaliacao', '=', 2)->get();
                 $isValid = true;
 
-                $presen = Presenca::find($presencaKey->presenca);
+                $presen = Presenca::findOrFail($presencaKey->presenca);
                 if ($presen != null) {
-                    $atv = Atividade::find($presen->atividade);
+                    $atv = Atividade::findOrFail($presen->atividade);
                 }
             } else {
                 $msg = "A chave " . $key . " já foi utilizada.";

@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="panel-body dted-font">
-                        {{ Form::model($pessoa, ['route' => ['pessoa.update', $pessoa->id], 'method' => 'PUT', 'data-parsley-validate' => '']) }}
+                        {{ Form::model($pessoa, ['route' => ['pessoa.update', $pessoa->encryptId()], 'method' => 'PUT', 'data-parsley-validate' => '']) }}
                         <div class="form-group row">
                             <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 {{ Form::label('nome', 'Nome:') }}

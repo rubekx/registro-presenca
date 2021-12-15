@@ -66,7 +66,7 @@
                         <div class="form-group row">
                             <div class='col-md-4'></div>
                             <div class='col-md-2' style='margin-top: 10px;'>
-                                {!! Html::linkRoute('pessoa.edit', 'Editar', [$pessoa->id], ['class' => 'btn dted-search-button-submit btn-block']) !!}
+                                {!! Html::linkRoute('pessoa.edit', 'Editar', [$pessoa->encryptId()], ['class' => 'btn dted-search-button-submit btn-block']) !!}                              
                             </div>
                             <div class='col-md-2' style='margin-top: 10px;'>
                                 {!! Html::linkRoute('profGeral.create', 'Avançar', null, ['class' => 'btn dted-search-button-submit btn-block']) !!}

@@ -21,7 +21,7 @@
                     </div>
                     <div class="panel-body">
                         @include('partials.messages')
-                        {{ Form::model($profGeral, ['route' => ['profGeral.update', $profGeral->id], 'method' => 'PUT', 'data-parsley-validate' => '']) }}
+                        {{ Form::model($profGeral, ['route' => ['profGeral.update', $profGeral->encryptId()], 'method' => 'PUT', 'data-parsley-validate' => '']) }}
                         <div class="form-group row">
                             <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 <label for="cbo">CBO:</label>

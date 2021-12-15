@@ -9,6 +9,7 @@ use App\Models\Municipio;
 use App\Models\Estado;
 use App\Models\ProfGeral;
 use Session;
+use Illuminate\Support\Facades\Crypt;
 
 class ProfGeralController extends Controller
 {
@@ -46,7 +47,7 @@ class ProfGeralController extends Controller
 
         if ($curProf != null) {
             $profGeral = $curProf;
-            $munObj = Municipio::find($profGeral->municipio);
+            $munObj = Municipio::findOrFail($profGeral->municipio);
 
             $cbos = Cbo::all();
             $arrayCbos = array();
@@ -143,7 +144,7 @@ class ProfGeralController extends Controller
         Session::put('profGeral', $profGeral);
 
         //redirect
-        return redirect()->route('profGeral.show', $profGeral->id);
+        return redirect()->route('profGeral.show', $profGeral->encryptId());
     }
 
     /**
@@ -154,9 +155,10 @@ class ProfGeralController extends Controller
      */
     public function show($id)
     {
-        $profGeral = ProfGeral::find($id);
-        $cbo = Cbo::find($profGeral->cbo);
-        $mun = Municipio::find($profGeral->municipio);
+        $id = Crypt::decrypt($id);
+        $profGeral = ProfGeral::findOrFail($id);
+        $cbo = Cbo::findOrFail($profGeral->cbo);
+        $mun = Municipio::findOrFail($profGeral->municipio);
         return view('profGeral.show')->with([
             'profGeral' => $profGeral,
             'cbo' => $cbo,
@@ -172,10 +174,10 @@ class ProfGeralController extends Controller
      */
     public function edit($id)
     {
-
+        $id = Crypt::decrypt($id);
         //find the post in the database and save as var
-        $profGeral = ProfGeral::find($id);
-        $munObj = Municipio::find($profGeral->municipio);
+        $profGeral = ProfGeral::findOrFail($id);
+        $munObj = Municipio::findOrFail($profGeral->municipio);
 
         $tipoParticipante = [
             1 => 'PARTICIPANTE EXTERNO',
@@ -225,7 +227,8 @@ class ProfGeralController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $profGeral = ProfGeral::find($id);
+        $id = Crypt::decrypt($id);
+        $profGeral = ProfGeral::findOrFail($id);
 
         $pessoa = Session::get('pessoa');
         $profGeral->pessoa = $pessoa->id;
@@ -247,7 +250,7 @@ class ProfGeralController extends Controller
             return redirect()->route('home');
         }
 
-        return redirect()->route('profGeral.show', $profGeral->id);
+        return redirect()->route('profGeral.show', $profGeral->encryptId());
     }
 
     /**
