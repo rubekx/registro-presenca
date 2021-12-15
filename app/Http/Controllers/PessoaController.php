@@ -7,6 +7,7 @@ use App\Models\Pessoa;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Session;
+use Illuminate\Support\Facades\Crypt;
 
 class PessoaController extends Controller
 {
@@ -61,7 +62,7 @@ class PessoaController extends Controller
         Session::put('pessoa', $pessoa);
 
         //redirect
-        return redirect()->route('pessoa.show', $pessoa->id);
+        return redirect()->route('pessoa.show', $pessoa->encryptId());
     }
 
     /**
@@ -72,7 +73,8 @@ class PessoaController extends Controller
      */
     public function show($id)
     {
-        $pessoa = Pessoa::find($id);
+        $id = Crypt::decrypt($id);
+        $pessoa = Pessoa::findOrFail($id);
         return view('pessoa.show')->withPessoa($pessoa);
     }
 
@@ -85,8 +87,8 @@ class PessoaController extends Controller
     public function edit($id)
     {
         //find the post in the database and save as var
-        $pessoa = Pessoa::find($id);
-
+        $id = Crypt::decrypt($id);
+        $pessoa = Pessoa::findOrFail($id);
         //return the view and pass in the var previously created
         return view('pessoa.edit')->withPessoa($pessoa);
     }
@@ -100,6 +102,7 @@ class PessoaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $id = Crypt::decrypt($id);
         $this->validate($request, [
             // $validator = Validator::make($request->all(), [
             'nome'  => 'required|min:2|max:20',
@@ -118,7 +121,7 @@ class PessoaController extends Controller
             'celular' => 'digits_between:5,20',
         ]);
 
-        $pessoa = Pessoa::find($id);
+        $pessoa = Pessoa::findOrFail($id);
 
         $pessoa->nome = $request->nome;
         $pessoa->sobrenome = $request->sobrenome;
@@ -133,7 +136,7 @@ class PessoaController extends Controller
         Session::flash('success', 'Pessoa cadastrada com sucesso!');
 
         //redirect
-        return redirect()->route('pessoa.show', $pessoa->id);
+        return redirect()->route('pessoa.show', $pessoa->encryptId());
     }
 
     /**

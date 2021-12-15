@@ -58,7 +58,7 @@
                 </div>
                 @if ($pessoa->email != null && $pessoa->cpf != null && $cbo != null)
                     <div class="dted-search-link">
-                        {!! Html::linkRoute('pessoa.edit', 'Edite seus dados cadastrais', [$pessoa->id], ['class' => 'pull-left']) !!}
+                        {!! Html::linkRoute('pessoa.edit', 'Edite seus dados cadastrais', [$pessoa->encryptId()], ['class' => 'pull-left']) !!}
                     </div>
                 @endif
             </div>

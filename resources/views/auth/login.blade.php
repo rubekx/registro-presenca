@@ -39,7 +39,7 @@
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <div class=" dted-search-h1"> Cadastro?</div>
+                            <div class=" dted-search-h1">Cadastro?</div>
                         </div>
                         <div class="panel-body">
                             <div class="form-group dted-font">

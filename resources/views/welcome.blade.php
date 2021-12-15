@@ -18,7 +18,7 @@
 @section('jscript')
     <script type="text/javascript">
         document.getElementById("search-event").onclick = function() {
-            location.href = "{{ route('home') }}";
+            location.href = "{{ route('login') }}";
         };
     </script>
 @endsection
