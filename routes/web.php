@@ -40,3 +40,4 @@ Route::get('/avaliacao/{key}', 'HomeController@getAvalPage');
 Route::post('/comprovante_avaliacao',  ['as' => 'persist_avaliacao', 'uses' => 'HomeController@persistAvaliacao']);
 Route::get('/comprovante_show/{key}',  ['as' => 'showAval', 'uses' => 'HomeController@avalShow']);
 
+
