@@ -3,7 +3,7 @@
     <div class="container h-50 transform-center-parent">
         <div class="row transform-center">
             @include('partials.messages')
-            @if (isset($firstSearch))
+            @if (!$firstSearch)
                 <div class="col-md-8 col-md-offset-2 dted-cadastrar-usuario">
                     <div class="panel panel-default">
                         <div class="panel-body">
