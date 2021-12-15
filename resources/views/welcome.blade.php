@@ -25,7 +25,13 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <a href="{{ url('login') }}"><img src="img/logo.png"></a>
+                    <a href="{{ url('login') }}">
+                        @if(env('APP_TELESSAUDE'))
+                            <img src="img/logo.png">
+                        @else
+                            <img src="img/dted.png">
+                        @endif
+                    </a>
                 </div>
 
                 <div class="links">

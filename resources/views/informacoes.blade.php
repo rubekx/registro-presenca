@@ -56,7 +56,9 @@
 					@if($pessoa->email == NULL || $pessoa->cpf == NULL || $cbo == NULL)
 						{!! Html::linkRoute('pessoa.edit', 'Editar Informações', array($pessoa->id), array('class' => 'btn btn-success center-block')) !!}
 					@else
-						{{ Form::submit('Avançar', array('class' => 'btn btn-primary center-block')) }}
+						@if(Session::has('atividade'))
+							{{ Form::submit('Avançar', array('class' => 'btn btn-primary center-block')) }}
+						@endif
 					@endif
 				{{ Form::close() }}
 

@@ -5,7 +5,8 @@
 <!-- CSRF Token -->
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>SINTS-MA @yield('title')</title>
+<title>@if(env('APP_TELESSAUDE')) {{'SINTS MA'}} @else {{'DTED'}} @endif @yield('title')
+</title>
 
 <!-- Styles -->
 <link href="/css/app.css" rel="stylesheet">

@@ -3,7 +3,12 @@
     <div class="navbar-header">
       <!-- Branding Image -->
       <a class="navbar-brand" href="{{ url('/') }}">
-        SINTS MA
+        
+        @if(env('APP_TELESSAUDE'))
+          {{'SINTS MA'}}
+        @else
+          {{'DTED'}}
+        @endif
       </a>
     </div>
 
