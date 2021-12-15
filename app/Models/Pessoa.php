@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class Pessoa
@@ -40,5 +41,14 @@ class Pessoa extends Model
 
     protected $guarded = [];
 
-        
+    public function encryptId()
+    {
+        return Crypt::encrypt($this->id);
+    }
+
+    public function decryptId()
+    {
+        $encryptId = $this->encryptId();
+        return Crypt::decrypt($encryptId);
+    }
 }

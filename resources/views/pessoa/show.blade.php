@@ -7,16 +7,16 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
+<div class="container h-50 transform-center-parent">
+    <div class="row transform-center">
         <div class="col-md-8 col-md-offset-2">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">Mostrar Cadastro de Pessoa</div>
-
-                <div class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="dted-search-h1">Mostrar Cadastro de Pessoa</div>                    
+                    </div>
+                    <div class="panel-body dted-font">
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 Nome:
                             </div>
                             <div class='col-md-5'>
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 Sobrenome:
                             </div>
                             <div class='col-md-5'>
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 CPF:
                             </div>
                             <div class='col-md-5'>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 Email:
                             </div>
                             <div class='col-md-5'>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 Celular:
                             </div>
                             <div class='col-md-5'>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                            <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 Sexo:
                             </div>
                             <div class='col-md-5'>
@@ -65,17 +65,17 @@
                         </div>
                         <div class="form-group row">
                             <div class='col-md-4'></div>
-                            <div class='col-md-2'>
-                                {!! Html::linkRoute('pessoa.edit', 'Editar', array($pessoa->id), array('class' => 'btn btn-primary btn-block')) !!}
+                            <div class='col-md-2' style='margin-top: 10px;'>
+                                {!! Html::linkRoute('pessoa.edit', 'Editar', [$pessoa->encryptId()], ['class' => 'btn dted-search-button-submit btn-block']) !!}                              
                             </div>
-                            <div class='col-md-2'>
-                                {!! Html::linkRoute('profGeral.create', 'Avançar', null, array('class' => 'btn btn-primary btn-block')) !!}
+                            <div class='col-md-2' style='margin-top: 10px;'>
+                                {!! Html::linkRoute('profGeral.create', 'Avançar', null, ['class' => 'btn dted-search-button-submit btn-block']) !!}
                             </div>
                             <div class='col-md-4'></div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
