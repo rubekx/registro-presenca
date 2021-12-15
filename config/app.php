@@ -169,7 +169,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         ValidadorCpf\CpfServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,7 +230,6 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
