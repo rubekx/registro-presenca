@@ -26,11 +26,6 @@ footer {
     height: 100px;
     font-family: Roboto;
     font-style: normal;
-    
-    /* position: fixed;
-    height: 100px;
-    bottom: 0;
-    width: 100%; */
 }
 
 .dted-header-button {
@@ -73,6 +68,7 @@ footer {
     line-height: 120px;
     color: #CFA772;
 }
+
 
 .dted-font {
     font-family: Roboto;
@@ -186,7 +182,7 @@ footer {
     padding-top: 20%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
 
     .dted-home-h1 {
         padding-left: 0%;
@@ -199,12 +195,21 @@ footer {
         padding-left: 0%;
         font-size: 30px;
         line-height: 35px;
-    }
+    } */
 
     .dted-home-button {
         margin-left: auto;
+        font-family: Roboto;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 20px;
+        color: #FFFFFF;
+        padding: 20px;
+        background: #8D0333;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 8px;
     }
-
+    
     .dted-header-logo {
         margin-left: 17%;
         margin-top: 1%;
@@ -219,13 +224,9 @@ footer {
     }
 
     footer {
-        background-color: #8D0333;
-        color: white;
         padding: 0px;
         height: 40px;
         font-size: small;
-        font-family: Roboto;
-        font-style: normal;
     }
 
     .transform-center {
@@ -244,8 +245,30 @@ footer {
 
 
 
-@media screen and (max-height:900px) {
-    .dted-home-h1 {
+@media screen and (max-height:768px) {
+
+    .dted-header-logo {
+        height:60px;
+        margin-left: 10%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .transform-center {
+        position: relative;
+        top: 50%;
+        transform: translateY(-45%);
+    }
+    
+    .h-50 {
+        height: 60vh;
+    }
+    
+    .dted-cadastrar-usuario{
+        padding-top: 20%;
+    }
+
+    /* .dted-home-h1 {
         font-size: 63px;
         line-height: 50px;
     }
@@ -253,6 +276,17 @@ footer {
     .dted-home-h2 {
         font-size: 30px;
         line-height: 35px;
+    } */
+
+    .dted-header-button {
+        margin-right: 17.16%;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+   
+    footer {
+        padding: 10px;
+        height: 40px;
     }
 
 }

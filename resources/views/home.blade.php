@@ -21,7 +21,7 @@
                     </div>
                 </div>
             @endif
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-lg-10 col-md-12 col-lg-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="dted-search-h1">Busque o seu cadastro</div>
@@ -50,3 +50,4 @@
         </div>
     </div>
 @endsection
+
