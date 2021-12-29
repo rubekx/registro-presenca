@@ -15,7 +15,7 @@
 }
 
 .navbar {
-    position: relative;
+    /* position: relative; */
     background: #8D0333;
 }
 
@@ -55,7 +55,11 @@ footer {
 }
 
 .dted-home-people-svg {
-    padding-top: 5%;
+    /* padding-top: 5%; */
+    width: 80%;
+}
+.dted-home-text-svg {
+    /* padding-top: 10%; */
     width: 80%;
 }
 
@@ -87,7 +91,7 @@ footer {
 }
 
 .dted-home-button {
-    margin-left: 21%;
+    /* margin-left: 21%; */
     font-family: Roboto;
     font-weight: bold;
     font-size: 24px;
@@ -187,7 +191,7 @@ footer {
     .dted-home-h1 {
         padding-left: 0%;
         padding-top: 0%;
-        font-size: 63px;
+        font-size: 50px;
         line-height: 50px;
     }
 
@@ -195,10 +199,10 @@ footer {
         padding-left: 0%;
         font-size: 30px;
         line-height: 35px;
-    } */
+    } 
 
     .dted-home-button {
-        margin-left: auto;
+        /* margin-left: auto; */
         font-family: Roboto;
         font-weight: bold;
         font-size: 20px;
@@ -242,7 +246,9 @@ footer {
         padding-top: 1%;
     }
 }
+@media screen and (max-height:900px) {
 
+}
 
 
 @media screen and (max-height:768px) {
@@ -268,7 +274,7 @@ footer {
         padding-top: 20%;
     }
 
-    /* .dted-home-h1 {
+    .dted-home-h1 {
         font-size: 63px;
         line-height: 50px;
     }
@@ -276,7 +282,7 @@ footer {
     .dted-home-h2 {
         font-size: 30px;
         line-height: 35px;
-    } */
+    }
 
     .dted-header-button {
         margin-right: 17.16%;
