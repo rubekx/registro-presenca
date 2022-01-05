@@ -6,7 +6,7 @@
 @section('content')
     <div class="container h-50 transform-center-parent">
         <div class="row transform-center">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-lg-10 col-md-12 col-lg-offset-1">
                 {{ Form::open(['route' => 'persist', 'data-parsley-validate' => '']) }}
                 <div class="panel panel-default">
                     <div class="panel-heading">

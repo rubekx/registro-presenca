@@ -23,7 +23,7 @@ footer {
     background-color: #8D0333;
     color: white;
     padding: 40px;
-    height: 100px;
+    height: 80px;
     font-family: Roboto;
     font-style: normal;
 }
@@ -50,8 +50,8 @@ footer {
 
 .dted-header-logo {
     margin-left: 22%;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .dted-home-people-svg {
@@ -195,7 +195,7 @@ footer {
         padding-left: 0%;
         font-size: 30px;
         line-height: 35px;
-    } */
+    } 
 
     .dted-home-button {
         margin-left: auto;
@@ -241,14 +241,19 @@ footer {
     .dted-cadastrar-usuario{
         padding-top: 1%;
     }
+
+    .dted-home-people-svg {
+        padding-top: 1%;
+        width: auto;
+    }
 }
 
 
 
-@media screen and (max-height:768px) {
+@media screen and (max-height:900px) {
 
     .dted-header-logo {
-        height:60px;
+        height:40px;
         margin-left: 10%;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -268,7 +273,7 @@ footer {
         padding-top: 20%;
     }
 
-    /* .dted-home-h1 {
+    .dted-home-h1 {
         font-size: 63px;
         line-height: 50px;
     }
@@ -276,17 +281,22 @@ footer {
     .dted-home-h2 {
         font-size: 30px;
         line-height: 35px;
-    } */
+    }
 
     .dted-header-button {
         margin-right: 17.16%;
-        margin-top: 15px;
+        margin-top: 10px;
         font-size: 14px;
     }
    
     footer {
         padding: 10px;
         height: 40px;
+    }
+
+    .dted-home-people-svg {
+        padding-top: 1%;
+        width: auto;
     }
 
 }

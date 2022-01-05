@@ -9,7 +9,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-lg-10 col-md-12 col-lg-offset-1">
 
                 @include('partials.messages')
 

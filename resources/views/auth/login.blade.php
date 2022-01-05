@@ -2,7 +2,7 @@
 @section('content')
     <div class="container h-50 transform-center-parent">
         <div class="row transform-center">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-lg-10 col-md-12 col-lg-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="dted-search-h1">Busque o seu evento</div>
@@ -36,7 +36,7 @@
                 </div>
             </div>
             @if (isset($firstSearch))
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-lg-10 col-md-12 col-lg-offset-1">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class=" dted-search-h1">Cadastro?</div>

@@ -4,7 +4,7 @@
         <div class="row transform-center">
             @include('partials.messages')
             @if (!$firstSearch)
-                <div class="col-md-8 col-md-offset-2 dted-cadastrar-usuario">
+                <div class="col-lg-10 col-md-12 col-lg-offset-1 dted-cadastrar-usuario">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="form-group row dted-font">
