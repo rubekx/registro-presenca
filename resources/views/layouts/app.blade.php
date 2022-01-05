@@ -7,7 +7,7 @@
 
 <body>
     @include('layouts.navbar')
-    @yield('content')
+    @include('layouts.content')
     @include('layouts.footer')
     @include('layouts.scripts')
     @yield('jscript-header')
