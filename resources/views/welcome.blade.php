@@ -1,14 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-sm-5">
-            <img src="img/svg/home/text.svg" class="dted-home-text-svg">
-            <button type='button' id="search-event" class="btn btn-lg dted-home-button">Entre para procurar seu
-                evento</button>
-        </div>
-        <div class="col-sm-5">
-            <img src="img/svg/home/people.svg" class="dted-home-people-svg">
+    <div class="vcenter">
+        <div class="row">
+            <div class="col-sm-5">
+                <img src="img/svg/home/text.svg" class="dted-home-text-svg">
+                <button type='button' id="search-event" class="btn btn-lg dted-home-button">Entre para procurar seu
+                    evento</button>
+            </div>
+            <div class="col-sm-5">
+                <img src="img/svg/home/people.svg" class="dted-home-people-svg">
+            </div>
         </div>
     </div>
 @endsection

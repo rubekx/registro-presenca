@@ -183,7 +183,7 @@ body {
 }
 
 
-.transform-center-parent {
+/* .transform-center-parent {
     position: relative;
     transform-style: preserve-3d;
 }
@@ -191,14 +191,22 @@ body {
 .transform-center {
     position: relative;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-80%);
 }
 
 .h-50 {
-    height: 60vh;
+    height: 80vh;
+} */
+
+.vcenter {
+    min-height: 70%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 70vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
 
     .dted-home-button {
         margin: 0px;
@@ -206,5 +214,10 @@ body {
         font-size: 16px;
         line-height: 10px;
         padding: 20px;
+    }
+
+    .vcenter {
+        min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
+        min-height: 50vh; /* These two lines are counted as one :-)       */
     }
 }
