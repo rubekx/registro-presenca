@@ -3,9 +3,9 @@
 @section('title', 'Comprovante de Presença')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+    {{-- <div class="container"> --}}
+        <div class="row vcenter">
+            <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
                 <div class="panel panel-default dted-font">
                     <div class="panel-heading">
                         <div class="dted-search-h1">Comprovante de Presença</div>
@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 @endsection
 @section('post-script')
     <script type="text/javascript">

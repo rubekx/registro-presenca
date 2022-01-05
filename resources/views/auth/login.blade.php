@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="row vcenter">
-        <div class="col-md-offset-2 col-lg-6 col-sm-10 col-xs-12">
+        <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="dted-search-h1">Busque o seu evento</div>
@@ -35,7 +35,7 @@
             </div>
         </div>
         @if (isset($firstSearch))
-            <div class="col-md-offset-2 col-lg-6 col-sm-10 col-xs-12">
+            <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class=" dted-search-h1">Cadastro?</div>

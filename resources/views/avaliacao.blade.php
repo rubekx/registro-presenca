@@ -8,9 +8,9 @@
 @section('title', 'Formulário de Avaliação')
 
 @section('content')
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+	{{-- <div class="container"> --}}
+		<div class="row vcenter">
+			<div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">Formulário de Avaliação</div>
 					<div class="panel-body">
@@ -121,5 +121,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	{{-- </div> --}}
 @endsection
