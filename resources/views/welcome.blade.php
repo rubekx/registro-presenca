@@ -10,7 +10,6 @@
         <div class="col-sm-5">
             <img src="img/svg/home/people.svg" class="dted-home-people-svg">
         </div>
-
     </div>
 @endsection
 @section('jscript')

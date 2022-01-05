@@ -18,6 +18,11 @@
     background: #8D0333;
 }
 
+footer {
+    background: #8D0333;
+    color: #FFFFFF;
+}
+
 .dted-nav-button {
     margin: 5%;
     background: #FFFFFF;
@@ -54,9 +59,8 @@
     background: #FFFFFF;
 }
 
-
 .dted-home-button {
-    margin:20px;
+    margin: 10px;
     font-family: Roboto;
     font-weight: bold;
     font-size: 24px;
@@ -176,4 +180,31 @@
 
 body {
     font-family: "Roboto";
+}
+
+
+.transform-center-parent {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.transform-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.h-50 {
+    height: 60vh;
+}
+
+@media screen and (max-width: 768px) {
+
+    .dted-home-button {
+        margin: 0px;
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 10px;
+        padding: 20px;
+    }
 }
