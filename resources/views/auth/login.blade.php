@@ -1,5 +1,31 @@
 @extends('layouts.app')
 @section('content')
+@if (isset($firstSearch))
+<div class="row">
+    <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class=" dted-search-h1">Cadastro?</div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group dted-font">
+                    <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                        Pessoa não encontrada!
+                    </div>
+                    <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
+                        Deseja se cadastrar?
+                    </div>
+                    <div class='col-md-4'>
+                        {{ Form::open(['route' => 'pessoa.create', 'method' => 'get']) }}
+                        {{ Form::submit('Sim, Cadastrar!', ['class' => 'btn btn dted-search-button-submit']) }}
+                        {{ Form::close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
     <div class="row vcenter">
         <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
             <div class="panel panel-default">
@@ -34,29 +60,5 @@
                 </div>
             </div>
         </div>
-        @if (isset($firstSearch))
-            <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class=" dted-search-h1">Cadastro?</div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group dted-font">
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                                Pessoa não encontrada!
-                            </div>
-                            <div class='col-md-4' style='margin-top: 5px; text-align: right;'>
-                                Deseja se cadastrar?
-                            </div>
-                            <div class='col-md-4'>
-                                {{ Form::open(['route' => 'pessoa.create', 'method' => 'get']) }}
-                                {{ Form::submit('Sim, Cadastrar!', ['class' => 'btn btn dted-search-button-submit']) }}
-                                {{ Form::close() }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
     </div>
 @endsection

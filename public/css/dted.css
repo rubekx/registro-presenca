@@ -21,6 +21,8 @@
 footer {
     background: #8D0333;
     color: #FFFFFF;
+    padding: 40px;
+    height: 100px;
 }
 
 .dted-nav-button {
@@ -224,6 +226,17 @@ body {
         min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
         min-height: 50vh; /* These two lines are counted as one :-)       */
     }
+
+    footer {
+        padding: 20px;
+        height: 60px;
+    }
+    .limit-header{
+        margin-top: 100px;
+    }
+    .limit-footer{
+        margin-bottom: 150px;
+    }
 }
 
 
@@ -237,4 +250,10 @@ body {
     .limit-footer{
         margin-bottom: 150px;
     }
+
+    footer {
+        padding: 10px;
+        height: auto;
+    }
+    
 }
