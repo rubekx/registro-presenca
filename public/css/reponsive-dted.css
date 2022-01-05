@@ -243,14 +243,17 @@ footer {
     }
 
     .dted-home-people-svg {
-        padding-top: 1%;
+        /* padding-top: 1%; */
         width: auto;
+    }
+    .dted-home-button{
+        margin-bottom: 100px;
     }
 }
 
 
 
-@media screen and (max-height:900px) {
+@media screen and (max-height:800px) {
 
     .dted-header-logo {
         height:40px;
@@ -290,13 +293,17 @@ footer {
     }
    
     footer {
+        padding-top: 400px;
         padding: 10px;
         height: 40px;
     }
 
     .dted-home-people-svg {
-        padding-top: 1%;
-        width: auto;
+        /* padding-top: -100%; */
+        height: auto;
     }
 
+    .dted-home-button{
+        margin-bottom: 100px;
+    }
 }
