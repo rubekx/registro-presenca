@@ -11,6 +11,7 @@
                         administração</h5>
                 </div>
                 <div class="panel-body">
+                    @include('partials.messages')
                     {!! Form::open(['route' => 'restrict_login', 'method' => 'post', 'class' => 'form']) !!}
                     @if (isset($atv_id))
                         <input type="hidden" id="atv_id" name="atv_id" value="{{ $atv_id }}">
