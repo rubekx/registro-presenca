@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\Atividade;
 use App\Models\Modalidade;
@@ -47,7 +48,7 @@ class HomeController extends Controller
     }
 
     public function getLoginPage($firstSearch = null)
-    {    
+    {
         date_default_timezone_set('America/Fortaleza');
         $today = date("Y-m-d");
         $hora  = date("H:i");
@@ -61,8 +62,8 @@ class HomeController extends Controller
         ])->get();
         $atividades = array();
         foreach ($atvs as $a) {
-            $modalidade = Modalidade::find($a->modalidade);
-            $tipo = Tipo::find($a->tipo);
+            $modalidade = Modalidade::findOrFail($a->modalidade);
+            $tipo = Tipo::findOrFail($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
             $ret = (strlen($a->tema) > 60) ? '...' : '';
             $atividades[$a->id] = $tipo->descricao . ' - ' . $tema . $ret;
@@ -89,13 +90,45 @@ class HomeController extends Controller
         ])->get();
         $atividades = array();
         foreach ($atvs as $a) {
-            $modalidade = Modalidade::find($a->modalidade);
-            $tipo = Tipo::find($a->tipo);
+            $modalidade = Modalidade::findOrFail($a->modalidade);
+            $tipo = Tipo::findOrFail($a->tipo);
             $tema = substr(trim($a->tema), 0, 60);
             $ret = (strlen($a->tema) > 60) ? '...' : '';
             $atividades[$a->id] = $tipo->descricao . ' - ' . $tema . $ret;
         }
         return view('restrict_login');
+    }
+
+    public function criptAtividade($str)
+    {
+        $inputlen = strlen($str);
+        $randkey = rand(1, 9);
+        $i = 0;
+        while ($i < $inputlen) {
+            $inputchr[$i] = (ord($str[$i]) - $randkey);
+            $i++;
+        }
+        $encrypted = implode('.', $inputchr) . '.' . (ord($randkey) + 50);
+        return $encrypted;
+    }
+
+    public function unCriptAtividade($str)
+    {
+        $input_count = strlen($str);
+        $dec = explode(".", $str);
+        $x = count($dec);
+        $y = $x - 1;
+        $calc = $dec[$y] - 50;
+        $randkey = chr($calc);
+        $i = 0;
+        $real = 0;
+        while ($i < $y) {
+            $array[$i] = $dec[$i] + $randkey;
+            $real .= chr($array[$i]);
+            $i++;
+        };
+        $input = $real;
+        return intval($input);
     }
 
     public function login(Request $request)
@@ -104,11 +137,13 @@ class HomeController extends Controller
             'idAtividade'  => 'required|min:1'
         ]);
 
-        info($request);
-
         $id = $request->idAtividade;
 
-        $atividade = Atividade::find($id);
+        if (!is_numeric($id)) {
+            return  view('auth.login')->with(['msg' => 'Atividade não encontrada...']);
+        }
+
+        $atividade = Atividade::findOrFail($id);
         if ($atividade == null) {
             // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
             return  view('auth.login')->with(['msg' => 'Atividade não encontrada...']);
@@ -116,13 +151,18 @@ class HomeController extends Controller
             $today = date("Y-m-d");
             $dataAtividade = $atividade->dt;
 
-            // if(1){
             if (strtotime($dataAtividade) == strtotime($today)) {
-                $modalidade = Modalidade::find($atividade->modalidade);
-                $tipo = Tipo::find($atividade->tipo);
+                $modalidade = Modalidade::findOrFail($atividade->modalidade);
+                $tipo = Tipo::findOrFail($atividade->tipo);
 
-                if (!($atividade->modalidade == 2 && $atividade->tipo == 22))
-                    return  view('restrict_login');
+                if (!($atividade->modalidade == 2 && $atividade->tipo == 22)) {
+                    $atv_id = $this->criptAtividade($id, strlen($atividade->tema));
+                    return view('restrict_login')
+                        ->with([
+                            'tema' => $atividade->tema,
+                            'atv_id' => $atv_id
+                        ]);
+                }
 
                 $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
                 $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
@@ -146,45 +186,72 @@ class HomeController extends Controller
 
     public function restrictLogin(Request $request)
     {
+
         $this->validate($request, [
-            'idAtividade'  => 'required|min:1'
+            'idAtividade'  => 'required|min:1',
+            /** Senha digitada */
+            'atv_id' => 'required'
+            /** Id da atividade solicitada */
         ]);
-
-        info($request);
-
 
         $id = $request->idAtividade;
 
-        $atividade = Atividade::find($id);
-        if ($atividade == null) {
-            // $request->session()->flash('AtividadeNotFound', 'Atividade não encontrada!');
-            return  view('restrict_login')->with(['msg' => 'Identificador fornecido não se refere a nenhuma atividade.']);
-        } else {
-            $today = date("Y-m-d");
-            $dataAtividade = $atividade->dt;
-
-            if (strtotime($dataAtividade) == strtotime($today)) {
-                $modalidade = Modalidade::find($atividade->modalidade);
-                $tipo = Tipo::find($atividade->tipo);
-
-                $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
-                $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
-
-                Session::put('atividade', $atividade);
-                Session::put('modalidade', $modalidade);
-                Session::put('tipo', $tipo);
-
-                return view('home')->with([
-                    'modalidade' => $modalidade,
-                    'firstSearch' => true,
-                    'atividade' => $atividade,
-                    'pessoa' => null,
-                    'tipo' => $tipo
-                ]);
-            }
-
-            return  view('restrict_login')->with(['msg' => 'Identificador fornecido não se refere a nenhuma atividade.']);
+        if (!is_numeric($id)) {
+            Session::flash('notFound', 'A senha fornecido não possui cadastro.');
+            return redirect()->route('login');
         }
+
+        try {
+            $atividade = Atividade::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            info($e);
+            Session::flash('notFound', 'A senha fornecido não possui cadastro.');
+            return redirect()->route('login');
+        }
+
+        $atv_id_uncript = $this->unCriptAtividade($request->atv_id);
+        info($atv_id_uncript);
+
+        $atividade_uncript = Atividade::findOrFail($atv_id_uncript);
+
+        if ($atividade_uncript == null) {
+            Session::flash('notFound', 'A senha fornecido não possui cadastro.');
+            return redirect()->route('login');
+        }
+
+        if ($atv_id_uncript != $id) {
+            $atividade = Atividade::findOrFail($atv_id_uncript);
+            Session::flash('notFound', 'A senha difere da atividade selecionada');
+            return  view('restrict_login')->with([
+                'msg' => 'A senha difere da atividade selecionada',
+                'tema' => $atividade->tema,
+                'atv_id' => $request->atv_id
+            ]);
+        }
+        $today = date("Y-m-d");
+        $dataAtividade = $atividade->dt;
+
+        if (strtotime($dataAtividade) == strtotime($today)) {
+            $modalidade = Modalidade::findOrFail($atividade->modalidade);
+            $tipo = Tipo::findOrFail($atividade->tipo);
+
+            $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
+            $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
+
+            Session::put('atividade', $atividade);
+            Session::put('modalidade', $modalidade);
+            Session::put('tipo', $tipo);
+
+            return view('home')->with([
+                'modalidade' => $modalidade,
+                'firstSearch' => true,
+                'atividade' => $atividade,
+                'pessoa' => null,
+                'tipo' => $tipo
+            ]);
+        }
+
+        return  view('restrict_login')->with(['msg' => 'A senha fornecido não possui cadastro.']);
     }
 
     public function getPessoa(Request $request)
@@ -196,8 +263,10 @@ class HomeController extends Controller
             $search = $request->searchTag;
         }
         $pessoa = null;
-
+        info(2);
+        info($search);
         if ($search != "") {
+            info(1);
             $found = false;
             $pessoa = Pessoa::where('email', $search)->first(); //Procurando por email
             if ($pessoa != null)
@@ -210,11 +279,12 @@ class HomeController extends Controller
                     $found = true;
             }
 
-
+            info(3);
             if (isset($request->searchTaghomeForm) && $pessoa == null) {
                 return $this->getLoginPage(1);
             }
-
+            info(4);
+            info($found);
             if ($found) {
                 $profGeral = ProfGeral::where("pessoa", $pessoa->id)->first();
                 $profSaude = ProfSaude::where("pessoa", $pessoa->id)->first();
@@ -248,10 +318,14 @@ class HomeController extends Controller
                     'ubs' => $ubs
                 ]);
             } else {
+                info(6);
                 $atividade = Session::get('atividade');
                 $modalidade = Session::get('modalidade');
                 $tipo = Session::get('tipo');
-
+                info($atividade);
+                info($modalidade);
+                info($tipo);
+                info($pessoa);
                 return view('home')->with([
                     'firstSearch' => false,
                     'pessoa' => $pessoa,
@@ -275,23 +349,40 @@ class HomeController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        Session::flush();
-        return redirect('login');
+        request()->session()->flush();
+        return redirect()->route('welcome');
     }
 
     public function getRegistroPage()
     {
+
         if (!Session::has('pessoa'))
             return redirect("home");
 
-        // $ipAddress = $_SERVER['REMOTE_ADDR'];
-        // if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
-        //     $ipAddress = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
-        // }
+        $tipoParticipante = [
+            1 => 'PARTICIPANTE EXTERNO',
+            2 => 'UFMA - DISCENTE',
+            3 => 'UFMA - DOCENTE',
+            4 => 'UFMA - TÉCNICO',
+        ];
 
-        // $ipAddress = otherRequest::ip();
+        $pessoa = Session::get('pessoa');
+        $profGeral = ProfGeral::where("pessoa", $pessoa->id)->first();
+
+        $ultimaPresenca = null;
+        if (Presenca::where('pessoa', $pessoa->id)->first()) {
+        
+            $ibge = Presenca::where('pessoa', $pessoa->id)->get()->last()->local;
+            $uf = Municipio::where('ibge', $ibge)->first()->uf;
+
+            $ultimaPresenca = json_encode([
+                'uf' => $uf,
+                'ibge' => $ibge,
+            ]);
+        }
+
         $request = otherRequest::instance();
         $request->setTrustedProxies([
             otherRequest::server('REMOTE_ADDR'),
@@ -311,7 +402,10 @@ class HomeController extends Controller
         }
 
         return view('registrar')->with([
+            'ultimaPresenca' => $ultimaPresenca,
+            'tipoParticipante' => $tipoParticipante,
             'estados' => $arrayEstados,
+            'profGeral' => $profGeral,
             'municipios' => $arrayMun,
             'ip' => $ipAddress
         ]);
@@ -319,11 +413,10 @@ class HomeController extends Controller
 
     public function persistPresenca(Request $request)
     {
-
         info($request);
 
         if (!Session::has('pessoa'))
-            return redirect("home");
+            return redirect()->route("logout");
 
         $ip = $request->ip;
         $estado = $request->estado;
@@ -332,6 +425,17 @@ class HomeController extends Controller
         $pessoa = Session::get('pessoa');
         $profSaude = Session::get('profSaude');
         $ubs = null;
+
+        $profGeral = ProfGeral::where('pessoa', $pessoa->id)->whereNull('tipo_participante')->first();
+
+        if ($profGeral != null) {
+            if ($request->vinculo_ufma == 'on') {
+                $profGeral->tipo_participante = $request->tipo_participante;
+            } else {
+                $profGeral->tipo_participante = 1;
+            }
+            $profGeral->save();
+        }
 
         if ($profSaude != null)
             $ubs = $profSaude->ubs;
@@ -352,13 +456,13 @@ class HomeController extends Controller
         $presenca->save();
 
         $atividade = $atividade->tema;
-        $pessoa = Pessoa::find($presenca->pessoa);
+        $pessoa = Pessoa::findOrFail($presenca->pessoa);
         $pessoa = $pessoa->nome . ' ' . $pessoa->sobrenome;
-        $local = Municipio::find($presenca->local);
-        $estado = Estado::find($local->uf);
+        $local = Municipio::findOrFail($presenca->local);
+        $estado = Estado::findOrFail($local->uf);
         $local = $local->nome . '/' . $estado->sigla;
         if ($ubs != null)
-            $ubs = Municipio::find($presenca->ubs);
+            $ubs = Municipio::findOrFail($presenca->ubs);
 
         // $presencaKey = new PresencaKey;
         // $key = $presencaKey->where([
@@ -381,7 +485,7 @@ class HomeController extends Controller
         // 	$codigo = $presencaKey->key_auth;
         // }
 
-        if (!PresencaKey::where('presenca', $presenca->id)->exists()) {
+        if (!PresencaKey::where('presenca', $presenca->id)->first()) {
             $presencaKey = new PresencaKey;
             $presencaKey->presenca = $presenca->id;
             $presencaKey->key_auth = md5(uniqid(rand(), true));
@@ -448,9 +552,9 @@ class HomeController extends Controller
                 $perguntasAval = $p->where('tipo_avaliacao', '=', 2)->get();
                 $isValid = true;
 
-                $presen = Presenca::find($presencaKey->presenca);
+                $presen = Presenca::findOrFail($presencaKey->presenca);
                 if ($presen != null) {
-                    $atv = Atividade::find($presen->atividade);
+                    $atv = Atividade::findOrFail($presen->atividade);
                 }
             } else {
                 $msg = "A chave " . $key . " já foi utilizada.";

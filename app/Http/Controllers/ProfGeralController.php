@@ -9,6 +9,7 @@ use App\Models\Municipio;
 use App\Models\Estado;
 use App\Models\ProfGeral;
 use Session;
+use Illuminate\Support\Facades\Crypt;
 
 class ProfGeralController extends Controller
 {
@@ -29,32 +30,40 @@ class ProfGeralController extends Controller
      */
     public function create()
     {
-
+        // ADICIONAR COLUNA NA TABELA PROF_GERAL
+        // ALTER TABLE prof_geral ADD COLUMN tipo_participante INT NULL;
 
         $pessoa = Session::get('pessoa');
         $curProf = ProfGeral::where([
             ['pessoa', '=', $pessoa->id]
         ])->first();
 
-         if($curProf!=null){
+        $tipoParticipante = [
+            1 => 'PARTICIPANTE EXTERNO',
+            2 => 'UFMA - DISCENTE',
+            3 => 'UFMA - DOCENTE',
+            4 => 'UFMA - TÉCNICO',
+        ];
+
+        if ($curProf != null) {
             $profGeral = $curProf;
-            $munObj = Municipio::find($profGeral->municipio);
+            $munObj = Municipio::findOrFail($profGeral->municipio);
 
             $cbos = Cbo::all();
-            $arrayCbos = Array();
-            foreach($cbos as $cbo){
+            $arrayCbos = array();
+            foreach ($cbos as $cbo) {
                 $arrayCbos[$cbo->codigo] = $cbo->nome;
             }
 
             $estados = Estado::all();
-            $arrayEstados = Array();
-            foreach($estados as $estado){
+            $arrayEstados = array();
+            foreach ($estados as $estado) {
                 $arrayEstados[$estado->id] = $estado->descricao;
             }
 
             $municipios = Municipio::all();
-            $arrayMun = Array();
-            foreach($municipios as $mun){
+            $arrayMun = array();
+            foreach ($municipios as $mun) {
                 $arrayMun[$mun->ibge] = $mun->nome;
             }
 
@@ -67,19 +76,20 @@ class ProfGeralController extends Controller
                 'arrayCbos' => $arrayCbos,
                 'arrayEstados' => $arrayEstados,
                 'arrayMun' => $arrayMun,
-                'currEstado' => $munObj->uf
+                'currEstado' => $munObj->uf,
+                'tipoParticipante' => $tipoParticipante
             ]);
         }
 
         $cbos = Cbo::all();
-        $arrayCbos = Array();
-        foreach($cbos as $cbo){
+        $arrayCbos = array();
+        foreach ($cbos as $cbo) {
             $arrayCbos[$cbo->codigo] = $cbo->nome;
         }
 
         $estados = Estado::all();
-        $arrayEstados = Array();
-        foreach($estados as $estado){
+        $arrayEstados = array();
+        foreach ($estados as $estado) {
             $arrayEstados[$estado->id] = $estado->descricao;
         }
 
@@ -88,7 +98,8 @@ class ProfGeralController extends Controller
         return view('profGeral.create')->with([
             'cbos' => $arrayCbos,
             'estados' => $arrayEstados,
-            'municipios' => $municipios
+            'municipios' => $municipios,
+            'tipoParticipante' => $tipoParticipante
         ]);
     }
 
@@ -108,31 +119,32 @@ class ProfGeralController extends Controller
             ['pessoa', '=', $pessoa->id]
         ])->first();
 
-        if($curProf!=null){
+        if ($curProf != null) {
             $profGeral = $curProf;
         }
 
         $profGeral->pessoa = $pessoa->id;
         $profGeral->cbo = $request->cbo;
         $profGeral->municipio = $request->municipio;
+        $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
 
-        if(strlen($profGeral->cbo)==1){
+
+        if (strlen($profGeral->cbo) == 1) {
             $profGeral->cbo = '00000' . $profGeral->cbo;
-        }
-        else if(strlen($profGeral->cbo)==5){
+        } else if (strlen($profGeral->cbo) == 5) {
             $profGeral->cbo = '0' . $profGeral->cbo;
         }
 
         $profGeral->save();
-        if(!Session::has('atividade')){
+        if (!Session::has('atividade')) {
             return redirect()->route('home');
         }
-         //message success
+        //message success
         Session::flash('success', 'Profissao cadastrada com sucesso!');
         Session::put('profGeral', $profGeral);
 
         //redirect
-        return redirect()->route('profGeral.show', $profGeral->id);
+        return redirect()->route('profGeral.show', $profGeral->encryptId());
     }
 
     /**
@@ -143,9 +155,10 @@ class ProfGeralController extends Controller
      */
     public function show($id)
     {
-        $profGeral = ProfGeral::find($id);
-        $cbo = Cbo::find($profGeral->cbo);
-        $mun = Municipio::find($profGeral->municipio);
+        $id = Crypt::decrypt($id);
+        $profGeral = ProfGeral::findOrFail($id);
+        $cbo = Cbo::findOrFail($profGeral->cbo);
+        $mun = Municipio::findOrFail($profGeral->municipio);
         return view('profGeral.show')->with([
             'profGeral' => $profGeral,
             'cbo' => $cbo,
@@ -161,25 +174,33 @@ class ProfGeralController extends Controller
      */
     public function edit($id)
     {
+        $id = Crypt::decrypt($id);
         //find the post in the database and save as var
-        $profGeral = ProfGeral::find($id);
-        $munObj = Municipio::find($profGeral->municipio);
+        $profGeral = ProfGeral::findOrFail($id);
+        $munObj = Municipio::findOrFail($profGeral->municipio);
+
+        $tipoParticipante = [
+            1 => 'PARTICIPANTE EXTERNO',
+            2 => 'UFMA - DISCENTE',
+            3 => 'UFMA - DOCENTE',
+            4 => 'UFMA - TÉCNICO',
+        ];
 
         $cbos = Cbo::all();
-        $arrayCbos = Array();
-        foreach($cbos as $cbo){
+        $arrayCbos = array();
+        foreach ($cbos as $cbo) {
             $arrayCbos[$cbo->codigo] = $cbo->nome;
         }
 
         $estados = Estado::all();
-        $arrayEstados = Array();
-        foreach($estados as $estado){
+        $arrayEstados = array();
+        foreach ($estados as $estado) {
             $arrayEstados[$estado->id] = $estado->descricao;
         }
 
         $municipios = Municipio::all();
-        $arrayMun = Array();
-        foreach($municipios as $mun){
+        $arrayMun = array();
+        foreach ($municipios as $mun) {
             $arrayMun[$mun->ibge] = $mun->nome;
         }
 
@@ -188,11 +209,12 @@ class ProfGeralController extends Controller
             'profGeral' => $profGeral,
             'cbos' => $arrayCbos,
             'estados' => $arrayEstados,
-            'municipios' => $municipios,
+            // 'municipios' => $municipios,
             'arrayCbos' => $arrayCbos,
             'arrayEstados' => $arrayEstados,
             'arrayMun' => $arrayMun,
-            'currEstado' => $munObj->uf
+            'currEstado' => $munObj->uf,
+            'tipoParticipante' => $tipoParticipante
         ]);
     }
 
@@ -205,29 +227,30 @@ class ProfGeralController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $profGeral = ProfGeral::find($id);
+        $id = Crypt::decrypt($id);
+        $profGeral = ProfGeral::findOrFail($id);
 
         $pessoa = Session::get('pessoa');
         $profGeral->pessoa = $pessoa->id;
         $profGeral->cbo = $request->cbo;
         $profGeral->municipio = $request->municipio;
+        $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
 
-        if(strlen($profGeral->cbo)==1){
+        if (strlen($profGeral->cbo) == 1) {
             $profGeral->cbo = '00000' . $profGeral->cbo;
-        }
-        else if(strlen($profGeral->cbo)==5){
+        } else if (strlen($profGeral->cbo) == 5) {
             $profGeral->cbo = '0' . $profGeral->cbo;
         }
 
         $profGeral->save();
 
-         //message success
+        //message success
         Session::flash('success', 'Profissao atualizada com sucesso!');
-        if(!Session::has('atividade')){
+        if (!Session::has('atividade')) {
             return redirect()->route('home');
         }
-       
-        return redirect()->route('profGeral.show', $profGeral->id);
+
+        return redirect()->route('profGeral.show', $profGeral->encryptId());
     }
 
     /**
@@ -241,7 +264,8 @@ class ProfGeralController extends Controller
         //
     }
 
-    public function getCbos(Request $request) {
+    public function getCbos(Request $request)
+    {
         $param = $request->get('search');
         $result = Cbo::where('nome', 'like', '%' . $param . '%')->get();
 
