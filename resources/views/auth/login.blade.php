@@ -33,6 +33,7 @@
                     <div class="dted-search-h1">Busque o seu evento</div>
                 </div>
                 <div class="panel-body">
+                    @include('partials.messages')
                     <form class="form" role="form" method="POST" action="{{ url('/home') }}">
                         {{ csrf_field() }}
                         <div class="form-group row dted-font">
@@ -48,7 +49,7 @@
                                 @endif
                             </div>
                         </div>
-                        @include('partials.messages')
+                        {{-- @include('partials.messages') --}}
                         <div class="form-group">
                             <button type="submit" class="btn dted-search-button-submit pull-right">Buscar</button>
                         </div>

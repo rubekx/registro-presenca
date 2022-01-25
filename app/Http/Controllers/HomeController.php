@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\Atividade;
 use App\Models\Modalidade;
@@ -193,23 +194,19 @@ class HomeController extends Controller
             /** Id da atividade solicitada */
         ]);
 
-        info($request);
-        info('uncript valor: ');
-        info($this->unCriptAtividade($request->atv_id));
-
-
         $id = $request->idAtividade;
 
         if (!is_numeric($id)) {
-            Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
-            return redirect()->back();
+            Session::flash('notFound', 'A senha fornecido não possui cadastro.');
+            return redirect()->route('login');
         }
 
-        $atividade = Atividade::findOrFail($id);
-
-        if ($atividade == null) {
-            Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
-            return redirect()->back();
+        try {
+            $atividade = Atividade::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            info($e);
+            Session::flash('notFound', 'A senha fornecido não possui cadastro.');
+            return redirect()->route('login');
         }
 
         $atv_id_uncript = $this->unCriptAtividade($request->atv_id);
@@ -218,12 +215,13 @@ class HomeController extends Controller
         $atividade_uncript = Atividade::findOrFail($atv_id_uncript);
 
         if ($atividade_uncript == null) {
-            Session::flash('notFound', 'A senha fornecido não se refere a nenhuma atividade.');
-            return redirect()->back();
+            Session::flash('notFound', 'A senha fornecido não possui cadastro.');
+            return redirect()->route('login');
         }
 
         if ($atv_id_uncript != $id) {
             $atividade = Atividade::findOrFail($atv_id_uncript);
+            Session::flash('notFound', 'A senha difere da atividade selecionada');
             return  view('restrict_login')->with([
                 'msg' => 'A senha difere da atividade selecionada',
                 'tema' => $atividade->tema,
@@ -253,7 +251,7 @@ class HomeController extends Controller
             ]);
         }
 
-        return  view('restrict_login')->with(['msg' => 'A senha fornecido não se refere a nenhuma atividade.']);
+        return  view('restrict_login')->with(['msg' => 'A senha fornecido não possui cadastro.']);
     }
 
     public function getPessoa(Request $request)
@@ -373,6 +371,18 @@ class HomeController extends Controller
         $pessoa = Session::get('pessoa');
         $profGeral = ProfGeral::where("pessoa", $pessoa->id)->first();
 
+        $ultimaPresenca = null;
+        if (Presenca::where('pessoa', $pessoa->id)->first()) {
+        
+            $ibge = Presenca::where('pessoa', $pessoa->id)->get()->last()->local;
+            $uf = Municipio::where('ibge', $ibge)->first()->uf;
+
+            $ultimaPresenca = json_encode([
+                'uf' => $uf,
+                'ibge' => $ibge,
+            ]);
+        }
+
         $request = otherRequest::instance();
         $request->setTrustedProxies([
             otherRequest::server('REMOTE_ADDR'),
@@ -392,6 +402,7 @@ class HomeController extends Controller
         }
 
         return view('registrar')->with([
+            'ultimaPresenca' => $ultimaPresenca,
             'tipoParticipante' => $tipoParticipante,
             'estados' => $arrayEstados,
             'profGeral' => $profGeral,
@@ -474,7 +485,7 @@ class HomeController extends Controller
         // 	$codigo = $presencaKey->key_auth;
         // }
 
-        if (!PresencaKey::where('presenca', $presenca->id)->exists()) {
+        if (!PresencaKey::where('presenca', $presenca->id)->first()) {
             $presencaKey = new PresencaKey;
             $presencaKey->presenca = $presenca->id;
             $presencaKey->key_auth = md5(uniqid(rand(), true));
