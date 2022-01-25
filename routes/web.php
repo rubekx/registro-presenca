@@ -20,6 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/template', function () {
+    return view('bootstrap-templates');
+})->name('template');
+
+Route::get('/template2', function () {
+    return view('navbar');
+})->name('template2');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', ['as' => 'logout', 'uses' => 'HomeController@logout']);
 Route::get('/login', ['as' => 'login', 'uses' => 'HomeController@getLoginPage']);

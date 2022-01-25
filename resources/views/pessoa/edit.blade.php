@@ -7,9 +7,9 @@
 @endsection
 
 @section('content')
-    <div class="container h-50 transform-center-parent">
-        <div class="row transform-center">
-            <div class="col-md-8 col-md-offset-2">
+    {{-- <div class="container h-50 transform-center-parent"> --}}
+        <div class="row vcenter">
+            <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
 
                 @include('partials.messages')
 
@@ -90,7 +90,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 @endsection
 
 @section('post-script')

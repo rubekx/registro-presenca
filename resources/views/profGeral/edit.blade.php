@@ -3,9 +3,9 @@
     {!! Html::style('css/parsley.css') !!}
 @endsection
 @section('content')
-    <div class="container h-50 transform-center-parent">
-        <div class="row transform-center">
-            <div class="col-md-8 col-md-offset-2">
+    {{-- <div class="container h-50 transform-center-parent"> --}}
+        <div class="row vcenter">
+            <div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <ul>
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
 @endsection
 @section('post-script')
     <script type="text/javascript">
