@@ -33,7 +33,7 @@
                         <div class='col-md-3' style='margin-top: 10px; text-align: left;'>
                             {{ Form::label('searchTag', 'Informação cadastral') }}
                         </div>
-                        <div class='col-md-7' style='margin-top: 5px;'>
+                        <div class='col-md-6' style='margin-top: 5px;'>
                             {{ Form::text('searchTag', null, ['class' => 'form-control', 'placeholder' => 'Digite seu CPF ou Email', 'autocomplete' => 'off']) }}
                         </div>
                         <div class='col-md-2' style='margin-top: 5px;'>

@@ -237,7 +237,7 @@ class HomeController extends Controller
 
             $atividade->hr_inicio = substr(trim($atividade->hr_inicio), 0, 5);
             $atividade->hr_termino = substr(trim($atividade->hr_termino), 0, 5);
-
+            Session::forget('notFound');
             Session::put('atividade', $atividade);
             Session::put('modalidade', $modalidade);
             Session::put('tipo', $tipo);
