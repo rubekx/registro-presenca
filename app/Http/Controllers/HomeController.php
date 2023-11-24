@@ -373,14 +373,14 @@ class HomeController extends Controller
 
         $ultimaPresenca = null;
         if (Presenca::where('pessoa', $pessoa->id)->first()) {
-        
             $ibge = Presenca::where('pessoa', $pessoa->id)->get()->last()->local;
-            $uf = Municipio::where('ibge', $ibge)->first()->uf;
-
-            $ultimaPresenca = json_encode([
-                'uf' => $uf,
-                'ibge' => $ibge,
-            ]);
+	    if(Municipio::where('ibge', $ibge)->exists()){
+            	$uf = Municipio::where('ibge', $ibge)->first()->uf;
+           	 $ultimaPresenca = json_encode([
+                	'uf' => $uf,
+                	'ibge' => $ibge,
+            	]);
+	    }
         }
 
         $request = otherRequest::instance();
