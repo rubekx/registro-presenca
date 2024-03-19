@@ -15,11 +15,11 @@
 }
 
 .navbar {
-    background: #8D0333;
+    background: #244e8a;
 }
 
 footer {
-    background: #8D0333;
+    background: #244e8a;
     color: #FFFFFF;
     padding: 40px;
     height: 100px;
@@ -35,11 +35,11 @@ footer {
     font-weight: 700;
     line-height: 28px;
     letter-spacing: 0em;
-    color: #8D0333;
+    color: #244e8a;
 }
 
 .dted-nav-button:hover {
-    color: #8D0333;
+    color: #244e8a;
     background: #FFFFFF;
 }
 
@@ -53,11 +53,11 @@ footer {
     font-weight: 700;
     line-height: 28px;
     letter-spacing: 0em;
-    color: #8D0333;
+    color: #244e8a;
 }
 
 .dted-header-button:hover {
-    color: #8D0333;
+    color: #244e8a;
     background: #FFFFFF;
 }
 
@@ -69,13 +69,13 @@ footer {
     line-height: 26px;
     color: #FFFFFF;
     padding: 30px;
-    background: #8D0333;
+    background: #244e8a;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
 }
 
 .dted-home-button:hover {
-    background-color: #8D0333;
+    background-color: #244e8a;
     color: #FFFFFF;
 }
 
@@ -83,12 +83,12 @@ footer {
     font-family: Roboto;
     font-weight: bold;
     color: #FFFFFF;
-    background: #8D0333;
+    background: #244e8a;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .dted-search-button-submit:hover {
-    background-color: #8D0333;
+    background-color: #244e8a;
     color: #FFFFFF;
 }
 

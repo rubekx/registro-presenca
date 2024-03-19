@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{ route('logout') }}">
-                    <img src="{{ asset('img/svg/header/dted-logo.svg') }}" alt="Brand">
+                    <img src="{{ asset('img/telessaude.png') }}" alt="Brand">
                 </a>
             </div>
             <div id="navbar3" class="navbar-collapse collapse">

@@ -4,7 +4,7 @@
     <div class="vcenter">
         <div class="row">
             <div class="col-sm-5">
-                <img src="img/svg/home/text.svg" class="dted-home-text-svg">
+                <img src="img/svg/home/text_telessaude.svg" class="dted-home-text-svg">
                 <button type='button' id="search-event" class="btn btn-lg dted-home-button">Entre para procurar seu
                     evento</button>
             </div>

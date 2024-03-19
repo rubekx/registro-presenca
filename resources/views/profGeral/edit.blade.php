@@ -30,14 +30,14 @@
                                 {{ Form::select('cbo', $cbos, null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-size' => '5', 'data-size' => '5', 'data-live-search-normalize' => 'true', 'title' => 'Por favor, selecione sua Profissão ...', 'data-parsley-required' => 'true']) }}
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 <label for="tipo_participante">Vínculo</label>
                             </div>
                             <div class='col-md-8'>
                                 {{ Form::select('tipo_participante', $tipoParticipante, $profGeral->tipo_participante, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'data-size' => '5', 'title' => 'Por favor, selecione seu vínculo ...', 'data-parsley-required' => 'true']) }}
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 <label for="estado">Estado:</label>
