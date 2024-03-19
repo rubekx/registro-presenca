@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
-
-	@include('partials.head')
-
+    @include('layouts.header')
 </head>
+
 <body>
-	<div id="app">
-		@include('partials.navbar')
-
-		@yield('content')
-
-		@include('partials.footer')
-	</div>
-
-
-	@include('partials.scripts')
-
-      @yield('post-script')
+    @include('layouts.navbar')
+    @include('layouts.content')
+    @include('layouts.footer')
+    @include('layouts.scripts')
+    @yield('jscript-header')
+    @yield('post-script')
+    @yield('jscript')
 </body>
+
 </html>

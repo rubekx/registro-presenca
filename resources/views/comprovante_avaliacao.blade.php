@@ -3,9 +3,9 @@
 @section('title', 'Comprovante de Avaliação')
 
 @section('content')
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
+	{{-- <div class="container"> --}}
+		<div class="row vcenter">
+			<div class="col-lg-offset-2 col-lg-6 col-md-10 col-xs-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">Comprovante de Avaliação</div>
 					<div class="panel-body">
@@ -19,12 +19,6 @@
 								@foreach($avaliacoes as $a)
 									<label>{{ $a->pergunta }}: </label> {{ $a->resposta }} </br>
 								@endforeach
-{{-- 								@foreach($perguntasAval as $pa)
-									<label>{{ $pa->descricao }}: </label> {{ $respostasAval[$pa->id] }} </br>
-								@endforeach --}}
-{{-- 								@foreach($perguntasGerais as $pg)
-									<label>{{ $pg->descricao }}: </label> {{ $respostasGerais[$pg->id] }} </br>
-								@endforeach --}}
 							</div>
 						</div>
 
@@ -39,5 +33,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	{{-- </div> --}}
 @endsection

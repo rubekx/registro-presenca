@@ -1,0 +1,130 @@
+
+.transform-center-parent {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.transform-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.h-50 {
+    height: 60vh;
+}
+
+.dted-cadastrar-usuario{
+    padding-top: 20%;
+}
+
+@media screen and (max-width: 900px) {
+
+    .dted-home-h1 {
+        padding-left: 0%;
+        padding-top: 0%;
+        font-size: 50px;
+        line-height: 50px;
+    }
+
+    .dted-home-h2 {
+        padding-left: 0%;
+        font-size: 30px;
+        line-height: 35px;
+    } 
+
+    .dted-home-button {
+        /* margin-left: auto; */
+        font-family: Roboto;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 20px;
+        color: #FFFFFF;
+        padding: 20px;
+        background: #244e8a;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 8px;
+    }
+    
+    .dted-header-logo {
+        margin-left: 17%;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .dted-header-button {
+        margin-right: 30%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    footer {
+        padding: 0px;
+        height: 40px;
+        font-size: small;
+    }
+
+    .transform-center {
+        position: relative;
+        top: 0%;
+        transform: translateY(0%);
+    }
+    
+    .h-50 {
+        height: 40vh;
+    }
+    .dted-cadastrar-usuario{
+        padding-top: 1%;
+    }
+}
+@media screen and (max-height:900px) {
+
+}
+
+
+@media screen and (max-height:768px) {
+
+    .dted-header-logo {
+        height:60px;
+        margin-left: 10%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .transform-center {
+        position: relative;
+        top: 50%;
+        transform: translateY(-45%);
+    }
+    
+    .h-50 {
+        height: 60vh;
+    }
+    
+    .dted-cadastrar-usuario{
+        padding-top: 20%;
+    }
+
+    .dted-home-h1 {
+        font-size: 63px;
+        line-height: 50px;
+    }
+
+    .dted-home-h2 {
+        font-size: 30px;
+        line-height: 35px;
+    }
+
+    .dted-header-button {
+        margin-right: 17.16%;
+        margin-top: 15px;
+        font-size: 14px;
+    }
+   
+    footer {
+        padding: 10px;
+        height: 40px;
+    }
+
+}

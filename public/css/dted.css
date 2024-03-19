@@ -1,0 +1,259 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../font/roboto-latin-ext.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../font/roboto-latin.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.navbar {
+    background: #244e8a;
+}
+
+footer {
+    background: #244e8a;
+    color: #FFFFFF;
+    padding: 40px;
+    height: 100px;
+}
+
+.dted-nav-button {
+    margin: 5%;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+    color: #244e8a;
+}
+
+.dted-nav-button:hover {
+    color: #244e8a;
+    background: #FFFFFF;
+}
+
+.dted-header-button {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+    color: #244e8a;
+}
+
+.dted-header-button:hover {
+    color: #244e8a;
+    background: #FFFFFF;
+}
+
+.dted-home-button {
+    margin: 10px;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 26px;
+    color: #FFFFFF;
+    padding: 30px;
+    background: #244e8a;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+
+.dted-home-button:hover {
+    background-color: #244e8a;
+    color: #FFFFFF;
+}
+
+.dted-search-button-submit {
+    font-family: Roboto;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #244e8a;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.dted-search-button-submit:hover {
+    background-color: #244e8a;
+    color: #FFFFFF;
+}
+
+
+.dted-search-button-reset {
+    font-family: Roboto;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #828282;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.dted-search-button-reset:hover {
+    background-color: #828282;
+    color: #FFFFFF;
+}
+
+.dted-home-h1 {
+    padding-left: 21%;
+    padding-top: 5%;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 110px;
+    line-height: 120px;
+    color: #CFA772;
+}
+
+.dted-home-h2 {
+    padding-left: 21%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 74px;
+    display: flex;
+    align-items: center;
+}
+
+.dted-search-h1 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    color: #828282;
+}
+
+.dted-center-box {
+    margin: auto;
+    width: 80%;
+    border: 1px solid #BDBDBD;
+    padding: 10px;
+}
+
+.dted-search-field {
+    min-width: 0;
+    width: 100%;
+    display: inline;
+}
+
+.dted-search-link {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 100%;
+    line-height: 28px;
+    color: #2F80ED;
+}
+
+.dted-font {
+    font-family: Roboto;
+    color: #828282;
+}
+
+
+.sidenav {
+    padding-top: 20px;
+    height: 100%;
+}
+
+
+.dted-home-people-svg {
+    width: 100%;
+}
+
+/* .dted-search-link{
+    margin: 20px;
+} */
+
+.dted-home-text-svg {
+    width: 100%;
+}
+
+body {
+    font-family: "Roboto";
+}
+
+
+/* .transform-center-parent {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.transform-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-80%);
+}
+
+.h-50 {
+    height: 80vh;
+} */
+
+.vcenter {
+    min-height: 70%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 70vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .dted-home-button {
+        margin: 0px;
+        margin-top: 10px;
+        font-size: 16px;
+        line-height: 10px;
+        padding: 20px;
+    }
+
+    .vcenter {
+        min-height: 50%;  /* Fallback for browsers do NOT support vh unit */
+        min-height: 50vh; /* These two lines are counted as one :-)       */
+    }
+
+    footer {
+        padding: 20px;
+        height: 60px;
+    }
+    .limit-header{
+        margin-top: 100px;
+    }
+    .limit-footer{
+        margin-bottom: 150px;
+    }
+}
+
+
+@media screen and (max-height:720px) {
+    /* .dted-search-link{
+        margin-bottom: 150px;
+    } */
+    .limit-header{
+        margin-top: 100px;
+    }
+    .limit-footer{
+        margin-bottom: 150px;
+    }
+
+    footer {
+        padding: 10px;
+        height: auto;
+    }
+    
+}

@@ -1,43 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Bem Vindo!</title>
-
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="css/master.css">
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            {{-- @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif --}}
-
-            <div class="content">
-                <div class="title m-b-md">
-                    <a href="{{ url('login') }}">
-                        @if(env('APP_TELESSAUDE'))
-                            <img src="img/logo.png">
-                        @else
-                            <img src="img/dted.png">
-                        @endif
-                    </a>
-                </div>
-
-                <div class="links">
-                    <a href="{{ url('login') }}">Registrar Presença</a>
-                </div>
+@section('content')
+    <div class="vcenter">
+        <div class="row">
+            <div class="col-sm-5">
+                <img src="img/svg/home/text_telessaude.svg" class="dted-home-text-svg">
+                <button type='button' id="search-event" class="btn btn-lg dted-home-button">Entre para procurar seu
+                    evento</button>
+            </div>
+            <div class="col-sm-5">
+                <img src="img/svg/home/people.svg" class="dted-home-people-svg">
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection
+@section('jscript')
+    {{-- <script type="text/javascript">
+        $(function() {
+            $(".dted-header-button").hide();
+        });
+    </script> --}}
+    <script type="text/javascript">
+        document.getElementById("search-event").onclick = function() {
+            location.href = "{{ route('login') }}";
+        };
+    </script>
+@endsection
