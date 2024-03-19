@@ -126,7 +126,7 @@ class ProfGeralController extends Controller
         $profGeral->pessoa = $pessoa->id;
         $profGeral->cbo = $request->cbo;
         $profGeral->municipio = $request->municipio;
-        $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
+        // $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
 
 
         if (strlen($profGeral->cbo) == 1) {
@@ -234,7 +234,7 @@ class ProfGeralController extends Controller
         $profGeral->pessoa = $pessoa->id;
         $profGeral->cbo = $request->cbo;
         $profGeral->municipio = $request->municipio;
-        $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
+        // $profGeral->tipo_participante = in_array($request->tipo_participante, [2, 3, 4]) == true ? $request->tipo_participante : 1;
 
         if (strlen($profGeral->cbo) == 1) {
             $profGeral->cbo = '00000' . $profGeral->cbo;

@@ -426,16 +426,16 @@ class HomeController extends Controller
         $profSaude = Session::get('profSaude');
         $ubs = null;
 
-        $profGeral = ProfGeral::where('pessoa', $pessoa->id)->whereNull('tipo_participante')->first();
+        // $profGeral = ProfGeral::where('pessoa', $pessoa->id)->whereNull('tipo_participante')->first();
 
-        if ($profGeral != null) {
-            if ($request->vinculo_ufma == 'on') {
-                $profGeral->tipo_participante = $request->tipo_participante;
-            } else {
-                $profGeral->tipo_participante = 1;
-            }
-            $profGeral->save();
-        }
+        // if ($profGeral != null) {
+        //     if ($request->vinculo_ufma == 'on') {
+        //         $profGeral->tipo_participante = $request->tipo_participante;
+        //     } else {
+        //         $profGeral->tipo_participante = 1;
+        //     }
+        //     $profGeral->save();
+        // }
 
         if ($profSaude != null)
             $ubs = $profSaude->ubs;

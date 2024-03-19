@@ -24,7 +24,7 @@
                                     class="form-control" data-parsley-required='true' />
                             </div>
                         </div>
-                        @if ($profGeral != null && $profGeral->tipo_participante == null)
+                        {{-- @if ($profGeral != null && $profGeral->tipo_participante == null)
                             <div class="form-group row">
                                 <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                     <label for="tipo_participante">Vínculo</label>
@@ -33,7 +33,7 @@
                                     {{ Form::select('tipo_participante', $tipoParticipante, $profGeral->tipo_participante, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'data-live-search-normalize' => 'true', 'data-size' => '5', 'title' => 'Por favor, selecione seu vínculo ...', 'data-parsley-required' => 'true']) }}
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="form-group row">
                             <div class='col-md-4' style='margin-top: 5px; text-align: left;'>
                                 <label for="estado">Estado:</label>

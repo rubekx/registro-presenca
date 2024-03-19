@@ -28,7 +28,7 @@ class ProfGeral extends Model
         'pessoa',
         'cbo',
         'municipio',
-        'tipo_participante'
+        // 'tipo_participante'
     ];
 
     protected $guarded = [];
