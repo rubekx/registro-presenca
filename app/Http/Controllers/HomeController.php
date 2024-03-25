@@ -91,10 +91,11 @@ class HomeController extends Controller
         $atividades = array();
         foreach ($atvs as $a) {
             $modalidade = Modalidade::findOrFail($a->modalidade);
-            $tipo = Tipo::findOrFail($a->tipo);
+            $tipo = Tipo::find($a->tipo);
+	    $tipo_desc =  $tipo != null ? $tipo->descricao  : '';
             $tema = substr(trim($a->tema), 0, 60);
             $ret = (strlen($a->tema) > 60) ? '...' : '';
-            $atividades[$a->id] = $tipo->descricao . ' - ' . $tema . $ret;
+            $atividades[$a->id] = $tipo_desc . ' - ' . $tema . $ret;
         }
         return view('restrict_login');
     }
