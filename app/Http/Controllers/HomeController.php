@@ -461,8 +461,8 @@ class HomeController extends Controller
         $local = Municipio::findOrFail($presenca->local);
         $estado = Estado::findOrFail($local->uf);
         $local = $local->nome . '/' . $estado->sigla;
-        if ($ubs != null)
-            $ubs = Municipio::findOrFail($presenca->ubs);
+       // if ($ubs != null)
+       //     $ubs = Municipio::findOrFail($presenca->ubs);
 
         // $presencaKey = new PresencaKey;
         // $key = $presencaKey->where([
