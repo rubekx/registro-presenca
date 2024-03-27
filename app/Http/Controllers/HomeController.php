@@ -579,7 +579,7 @@ class HomeController extends Controller
 
     public function persistAvaliacao(Request $request)
     {
-
+//	dd($request->all());
         $key = $request->key;
         $ip = $request->ip;
         $tipoAval = $request->tipoAval;
@@ -604,12 +604,14 @@ class HomeController extends Controller
         // Log::info($respostasAval);
 
         // Pegando a presenca com a key
-        $pk = new PresencaKey;
-        $presencaKey = $pk->where('key_auth', '=', $key)->get()->first();
-        if ($presencaKey != null) {
+        //$pk = new PresencaKey;
+       // $presencaKey = PresencaKey::where('key_auth', '=', $key)->first();
+        if (!PresencaKey::where('key_auth', '=', $key)->exists()) {
+		info('aqui');
             return redirect("home");
         }
-
+	$presencaKey = PresencaKey::where('key_auth', '=', $key)->first();
+	info('certo');
         if (!$presencaKey->used) {
             foreach ($perguntasAval as $pa) {
                 $a = new Avaliaco;
